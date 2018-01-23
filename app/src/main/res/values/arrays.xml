@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_character_orderBy">
+        <item>Name (Ascending)</item>
+        <item>Name (Descending)</item>
+    </string-array>
+    <string-array name="spinner_comics_orderBy">
+        <item>Title (Ascending)</item>
+        <item>Title (Descending)</item>
+        <item>Issue Number (Ascending) </item>
+        <item>Issue Number (Descending)</item>
+        <item>On Sale Date</item>
+    </string-array>
+    <string-array name="spinner_series_orderBY">
+        <item>Title (Ascending)</item>
+        <item>Title (Descending)</item>
+        <item>Start Year (Ascending) </item>
+        <item>Start Year (Descending)</item>
+    </string-array>
+    <string-array name="spinner_creators_orderBy">
+        <item>First Name (Ascending)</item>
+        <item>First Name (Descending)</item>
+        <item>Last Name (Ascending)</item>
+        <item>Last Name (Descending)</item>
+    </string-array>
+</resources>

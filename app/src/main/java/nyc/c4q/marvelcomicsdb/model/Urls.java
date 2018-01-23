@@ -1,4 +1,4 @@
-package nyc.c4q.marvelcomicsdb.models.series;
+package nyc.c4q.marvelcomicsdb.model;
 
 
 public class Urls {

@@ -46,7 +46,7 @@ public interface MarvelDBService {
             @Query("limit") int limit
     );
 
-    @GET("v1/public/creators")
+    @GET("v1/public/creators?")
     Call<Creators> getCreatorsDoscover(
             @Query("api_key") String apikey,
             @Query("firstName") String firstName,

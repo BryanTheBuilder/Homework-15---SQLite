@@ -1,7 +1,7 @@
 package nyc.c4q.marvelcomicsdb.model;
 
 
-public class Thumbnail {
+public class Image {
     private String path;
     private String extension;
 

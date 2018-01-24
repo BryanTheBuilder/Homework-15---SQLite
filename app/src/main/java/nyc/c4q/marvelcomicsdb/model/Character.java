@@ -1,22 +1,23 @@
 package nyc.c4q.marvelcomicsdb.model;
 
 
+import java.util.Date;
 import java.util.List;
 
-public class Results {
-    private String id;
+public class Character {
+    private int id;
     private String name;
     private String description;
-    private String modified;
+    private Date modified;
     private String resourceuri;
-    private List<Urls> urls;
-    private Thumbnail thumbnail;
-    private Comics comics;
-    private Stories stories;
-    private Events events;
-    private Series series;
+    private List<Url> urls;
+    private Image image;
+    private ComicList comics;
+    private StoryList stories;
+    private EventList events;
+    private SeriesList series;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -28,7 +29,7 @@ public class Results {
         return description;
     }
 
-    public String getModified() {
+    public Date getModified() {
         return modified;
     }
 
@@ -36,27 +37,27 @@ public class Results {
         return resourceuri;
     }
 
-    public List<Urls> getUrls() {
+    public List<Url> getUrls() {
         return urls;
     }
 
-    public Thumbnail getThumbnail() {
-        return thumbnail;
+    public Image getImage() {
+        return image;
     }
 
-    public Comics getComics() {
+    public ComicList getComics() {
         return comics;
     }
 
-    public Stories getStories() {
+    public StoryList getStories() {
         return stories;
     }
 
-    public Events getEvents() {
+    public EventList getEvents() {
         return events;
     }
 
-    public Series getSeries() {
+    public SeriesList getSeries() {
         return series;
     }
 }

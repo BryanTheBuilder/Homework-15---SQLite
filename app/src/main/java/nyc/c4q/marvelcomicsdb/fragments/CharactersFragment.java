@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import nyc.c4q.marvelcomicsdb.API.MarvelDBService;
 import nyc.c4q.marvelcomicsdb.R;
-import nyc.c4q.marvelcomicsdb.model.Characters;
+import nyc.c4q.marvelcomicsdb.model.CharacterDataWrapper;
 import nyc.c4q.marvelcomicsdb.service.MarvelDatabaseServiceGenerator;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,15 +31,15 @@ public class CharactersFragment extends Fragment {
     }
 
     public void getCharacterData(){
-        Call<Characters> charactersCall = marvelCallback.getCharactersDiscover("b50c206319ac5359d379de4d56395a7a","","","","",0);
-        charactersCall.enqueue(new Callback<Characters>() {
+        Call<CharacterDataWrapper> charactersCall = marvelCallback.getCharactersDiscover();
+        charactersCall.enqueue(new Callback<CharacterDataWrapper>() {
             @Override
-            public void onResponse(Call<Characters> call, Response<Characters> response) {
+            public void onResponse(Call<CharacterDataWrapper> call, Response<CharacterDataWrapper> response) {
 
             }
 
             @Override
-            public void onFailure(Call<Characters> call, Throwable t) {
+            public void onFailure(Call<CharacterDataWrapper> call, Throwable t) {
 
             }
         });

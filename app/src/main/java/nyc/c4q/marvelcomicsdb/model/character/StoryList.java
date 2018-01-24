@@ -1,12 +1,12 @@
-package nyc.c4q.marvelcomicsdb.model;
+package nyc.c4q.marvelcomicsdb.model.character;
 
 import java.util.List;
 
-public class ComicList {
+public class StoryList {
     private int available;
     private int returned;
     private String collectionURI;
-    private List<ComicSummary> items;
+    private List<StorySummary> items;
 
     public int getAvailable() {
         return available;
@@ -20,13 +20,14 @@ public class ComicList {
         return collectionURI;
     }
 
-    public List<ComicSummary> getItems() {
+    public List<StorySummary> getItems() {
         return items;
     }
 
-    public static class ComicSummary {
+    public static class StorySummary {
         private String resourceURI;
         private String name;
+        private String type;
 
         public String getResourceURI() {
             return resourceURI;
@@ -34,6 +35,10 @@ public class ComicList {
 
         public String getName() {
             return name;
+        }
+
+        public String getType() {
+            return type;
         }
     }
 }

@@ -11,7 +11,7 @@ public class Character {
     private Date modified;
     private String resourceuri;
     private List<Url> urls;
-    private Image image;
+    private Image thumbnail;
     private ComicList comics;
     private StoryList stories;
     private EventList events;
@@ -41,8 +41,8 @@ public class Character {
         return urls;
     }
 
-    public Image getImage() {
-        return image;
+    public Image getThumbnail() {
+        return thumbnail;
     }
 
     public ComicList getComics() {

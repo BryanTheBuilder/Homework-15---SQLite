@@ -67,6 +67,16 @@ public interface MarvelDBService {
     Call<CreatorDataWrapper> sortCreatorsDiscover(
             @Query("ts") String timestamp,
             @Query("apikey") String apiKey,
-            @Query("hash") String hash
+            @Query("hash") String hash,
+            @Query("firstName") String firstName,
+            @Query("lastName") String lastName,
+            @Query("comics") int comics,
+            @Query("series") int series,
+            @Query("events") int events,
+            @Query("stories") int stories,
+            @Query("orderBy") String orderBy,
+            @Query("limit") int limit,
+            @Query("offset") int offset
+
     );
 }

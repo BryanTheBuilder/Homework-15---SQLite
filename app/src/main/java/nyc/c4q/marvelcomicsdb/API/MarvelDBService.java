@@ -1,9 +1,9 @@
 package nyc.c4q.marvelcomicsdb.API;
 
 
-import java.util.Date;
-
 import nyc.c4q.marvelcomicsdb.model.character.CharacterDataWrapper;
+import nyc.c4q.marvelcomicsdb.model.comics.ComicDataWrapper;
+import nyc.c4q.marvelcomicsdb.model.creator.CreatorDataWrapper;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -18,14 +18,14 @@ public interface MarvelDBService {
     );
 
     @GET("v1/public/comics?")
-    Call<CharacterDataWrapper> getComicsDiscover(
+    Call<ComicDataWrapper> getComicsDiscover(
             @Query("ts") String timestamp,
             @Query("apikey") String apiKey,
             @Query("hash") String hash
     );
 
     @GET("v1/public/creators?")
-    Call<CharacterDataWrapper> getCreatorsDiscover(
+    Call<CreatorDataWrapper> getCreatorsDiscover(
             @Query("ts") String timestamp,
             @Query("apikey") String apiKey,
             @Query("hash") String hash

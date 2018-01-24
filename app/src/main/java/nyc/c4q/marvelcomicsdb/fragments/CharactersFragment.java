@@ -12,6 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import nyc.c4q.marvelcomicsdb.API.MarvelDBService;
+import nyc.c4q.marvelcomicsdb.API.PrivateAPI;
 import nyc.c4q.marvelcomicsdb.R;
 import nyc.c4q.marvelcomicsdb.model.character.CharacterDataWrapper;
 import nyc.c4q.marvelcomicsdb.service.MarvelDatabaseServiceGenerator;

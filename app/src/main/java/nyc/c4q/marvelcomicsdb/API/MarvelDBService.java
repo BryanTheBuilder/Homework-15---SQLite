@@ -3,7 +3,7 @@ package nyc.c4q.marvelcomicsdb.API;
 
 import java.util.Date;
 
-import nyc.c4q.marvelcomicsdb.model.CharacterDataWrapper;
+import nyc.c4q.marvelcomicsdb.model.character.CharacterDataWrapper;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -12,7 +12,14 @@ public interface MarvelDBService {
 
     @GET("v1/public/characters?")
     Call<CharacterDataWrapper> getCharactersDiscover(
-            @Query("api_key") String apiKey,
+            @Query("ts") String timestamp,
+            @Query("apikey") String apiKey,
+            @Query("hash") String hash
+    );
+
+    @GET("v1/public/characters?")
+    Call<CharacterDataWrapper> sortCharactersDiscover(
+            @Query("apikey") String apiKey,
             @Query("name") String name,
             @Query("nameStartsWith") String nameStartsWith,
             @Query("modifiedSince") Date modifiedSince,

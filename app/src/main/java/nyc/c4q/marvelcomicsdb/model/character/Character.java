@@ -1,4 +1,4 @@
-package nyc.c4q.marvelcomicsdb.model;
+package nyc.c4q.marvelcomicsdb.model.character;
 
 
 import java.util.Date;
@@ -9,7 +9,7 @@ public class Character {
     private String name;
     private String description;
     private Date modified;
-    private String resourceuri;
+    private String resourceURI;
     private List<Url> urls;
     private Image thumbnail;
     private ComicList comics;
@@ -33,8 +33,8 @@ public class Character {
         return modified;
     }
 
-    public String getResourceuri() {
-        return resourceuri;
+    public String getResourceURI() {
+        return resourceURI;
     }
 
     public List<Url> getUrls() {

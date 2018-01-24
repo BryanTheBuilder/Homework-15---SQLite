@@ -1,4 +1,4 @@
-package nyc.c4q.marvelcomicsdb.model;
+package nyc.c4q.marvelcomicsdb.model.character;
 
 
 public class CharacterDataWrapper {

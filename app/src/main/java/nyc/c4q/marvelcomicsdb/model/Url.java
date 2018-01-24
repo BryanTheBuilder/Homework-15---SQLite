@@ -1,7 +1,7 @@
 package nyc.c4q.marvelcomicsdb.model;
 
 
-public class Urls {
+public class Url {
     private String type;
     private String url;
 

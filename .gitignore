@@ -7,4 +7,5 @@
 /build
 /captures
 .externalNativeBuild
-/API/PrivateAPI.java
+app/src/main/java/nyc/c4q/marvelcomicsdb/Utils/PrivateAPI.java
+

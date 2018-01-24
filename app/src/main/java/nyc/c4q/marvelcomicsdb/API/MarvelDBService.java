@@ -47,7 +47,7 @@ public interface MarvelDBService {
     );
 
     @GET("v1/public/comics?")
-    Call<CharacterDataWrapper> sortComicsDiscover(
+    Call<ComicDataWrapper> sortComicsDiscover(
             @Query("ts") String timestamp,
             @Query("apikey") String apiKey,
             @Query("hash") String hash,
@@ -64,7 +64,7 @@ public interface MarvelDBService {
     );
 
     @GET("v1/public/creators?")
-    Call<CharacterDataWrapper> sortCreatorsDiscover(
+    Call<CreatorDataWrapper> sortCreatorsDiscover(
             @Query("ts") String timestamp,
             @Query("apikey") String apiKey,
             @Query("hash") String hash

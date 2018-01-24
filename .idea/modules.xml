@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Homework-15---SQLite.iml" filepath="$PROJECT_DIR$/Homework-15---SQLite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MarvelComicsDB.iml" filepath="$PROJECT_DIR$/MarvelComicsDB.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

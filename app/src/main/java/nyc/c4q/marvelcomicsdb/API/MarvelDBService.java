@@ -12,7 +12,9 @@ public interface MarvelDBService {
 
     @GET("v1/public/characters?")
     Call<CharacterDataWrapper> getCharactersDiscover(
-            @Query("apikey") String apiKey
+            @Query("ts") String timestamp,
+            @Query("apikey") String apiKey,
+            @Query("hash") String hash
     );
 
     @GET("v1/public/characters?")

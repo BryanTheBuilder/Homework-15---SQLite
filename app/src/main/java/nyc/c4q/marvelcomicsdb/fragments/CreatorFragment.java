@@ -1,5 +1,6 @@
 package nyc.c4q.marvelcomicsdb.fragments;
 
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,59 +14,46 @@ import java.util.Date;
 
 import nyc.c4q.marvelcomicsdb.API.MarvelDBService;
 import nyc.c4q.marvelcomicsdb.R;
-import nyc.c4q.marvelcomicsdb.model.character.CharacterDataWrapper;
+import nyc.c4q.marvelcomicsdb.model.creator.CreatorDataWrapper;
 import nyc.c4q.marvelcomicsdb.service.MarvelDatabaseServiceGenerator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CharactersFragment extends Fragment {
+public class CreatorFragment extends Fragment {
     public static final MarvelDBService marvelCallback = MarvelDatabaseServiceGenerator.createService();
     private static final String API_KEY = "b50c206319ac5359d379de4d56395a7a";
     private static final Long TIMESTAMP = new Date().getTime();
     private static String privateAPI = PrivateAPI.getPrivateApiKey();
-
-    private String name;
-    private String nameStartsWith;
-    private Date modifiedSince;
-    private int comics;
-    private int series;
-    private int events;
-    private int stories;
-    private String orderBy;
-    private int limit;
-    private int offset;
-
     private View rootView;
 
-    public CharactersFragment() {
+    public CreatorFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_characters, container, false);
-
+        rootView = inflater.inflate(R.layout.fragment_creator, container, false);
         try {
-            getCharacterData();
+            getCreatorData();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
         return rootView;
     }
 
-    public void getCharacterData() throws NoSuchAlgorithmException {
+    public void getCreatorData() throws NoSuchAlgorithmException {
         String hash = md5(TIMESTAMP.toString() + privateAPI + API_KEY);
-        Call<CharacterDataWrapper> call = marvelCallback.getCharactersDiscover(TIMESTAMP.toString(), API_KEY, hash);
-        call.enqueue(new Callback<CharacterDataWrapper>() {
+        Call<CreatorDataWrapper> call = marvelCallback.getCreatorsDiscover(TIMESTAMP.toString(), API_KEY, hash);
+        call.enqueue(new Callback<CreatorDataWrapper>() {
             @Override
-            public void onResponse(Call<CharacterDataWrapper> call, Response<CharacterDataWrapper> response) {
+            public void onResponse(Call<CreatorDataWrapper> call, Response<CreatorDataWrapper> response) {
                 Log.d("MARVEL CALLBACK", "onResponse: " + response.body().getEtag());
             }
 
             @Override
-            public void onFailure(Call<CharacterDataWrapper> call, Throwable t) {
+            public void onFailure(Call<CreatorDataWrapper> call, Throwable t) {
                 Log.d("MARVEL CALLBACK", "onResponse: " + t.toString());
             }
         });

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -60,18 +61,21 @@ public class CharactersFragment extends Fragment {
 
     public void getCharacterData() throws NoSuchAlgorithmException {
         String hash = md5(TIMESTAMP.toString() + privateAPI + API_KEY);
-        Call<CharacterDataWrapper> call = marvelCallback
-                .getCharactersDiscover(TIMESTAMP.toString(), API_KEY, hash);
+
+        Call<CharacterDataWrapper> call = marvelCallback.getCharactersDiscover(TIMESTAMP.toString(), API_KEY, hash);
         call.enqueue(new Callback<CharacterDataWrapper>() {
             @Override
             public void onResponse(Call<CharacterDataWrapper> call,
                                    Response<CharacterDataWrapper> response) {
-                Log.d("MARVEL CALLBACK", "onResponse: " + response.body().getEtag());
+                CharacterDataWrapper characterDataWrapper = new CharacterDataWrapper();
+                TextView textView = rootView.findViewById(R.id.character_attributionText);
+                textView.setText(characterDataWrapper.getAttributionText());
+                Log.d("CHARACTER CALLBACK", "onResponse: " + response.body().getEtag());
             }
 
             @Override
             public void onFailure(Call<CharacterDataWrapper> call, Throwable t) {
-                Log.d("MARVEL CALLBACK", "onResponse: " + t.toString());
+                Log.d("CHARACTER CALLBACK", "onFailure: " + t.toString());
             }
         });
     }

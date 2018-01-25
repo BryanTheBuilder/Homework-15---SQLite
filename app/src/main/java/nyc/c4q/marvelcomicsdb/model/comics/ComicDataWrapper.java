@@ -5,7 +5,7 @@ public class ComicDataWrapper {
     private int code;
     private String status;
     private String copyright;
-    private String attributiontext;
+    private String attributionText;
     private String attributionhtml;
     private ComicDataContainer data;
     private String etag;
@@ -22,8 +22,8 @@ public class ComicDataWrapper {
         return copyright;
     }
 
-    public String getAttributiontext() {
-        return attributiontext;
+    public String getAttributionText() {
+        return attributionText;
     }
 
     public String getAttributionhtml() {

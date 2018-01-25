@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -38,7 +39,7 @@ public class CreatorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_creator, container, false);
-        try {
+         try {
             getCreatorData();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -53,12 +54,12 @@ public class CreatorFragment extends Fragment {
         call.enqueue(new Callback<CreatorDataWrapper>() {
             @Override
             public void onResponse(Call<CreatorDataWrapper> call, Response<CreatorDataWrapper> response) {
-                Log.d("MARVEL CALLBACK", "onResponse: " + response.body().getEtag());
+                Log.d("CREATOR CALLBACK", "onResponse: " + response.body().getEtag());
             }
 
             @Override
             public void onFailure(Call<CreatorDataWrapper> call, Throwable t) {
-                Log.d("MARVEL CALLBACK", "onResponse: " + t.toString());
+                Log.d("CREATOR CALLBACK", "onFailure: " + t.toString());
             }
         });
     }

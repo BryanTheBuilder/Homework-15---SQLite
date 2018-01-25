@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_login"
+    tools:context="nyc.c4q.marvelcomicsdb.CreateAccountActivity">
+
+    <TextView
+        android:id="@+id/first_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@color/white"
+        android:text="First Name"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+    <EditText
+        android:id="@+id/enter_firstname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@color/white"
+        android:hint="Luke"
+        android:lines="1"
+        android:maxLength="28"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+    <TextView
+        android:id="@+id/last_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@color/white"
+        android:text="Last Name"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+    <EditText
+        android:id="@+id/enter_lastname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_gravity="fill_horizontal"
+        android:background="@color/white"
+        android:hint="Skywalker"
+        android:lines="1"
+        android:maxLength="28"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+    <TextView
+        android:id="@+id/zip_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@color/white"
+        android:text="Zip Code"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+    <EditText
+        android:id="@+id/zip_code_entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@color/white"
+        android:hint="Zip Code"
+        android:inputType="number"
+        android:lines="1"
+        android:maxLength="28"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@color/white"
+        android:text="Email"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+    <EditText
+        android:id="@+id/enter_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@color/white"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:lines="1"
+        android:maxLength="28"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+    <TextView
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@color/white"
+        android:text="Password"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+    <EditText
+        android:id="@+id/password_entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@color/white"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:maxLength="28"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+    <TextView
+        android:id="@+id/confirm_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@color/white"
+        android:text="Confirm Password"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+    <EditText
+        android:id="@+id/confirm_password_entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@color/white"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:maxLength="28"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+</android.support.constraint.ConstraintLayout>

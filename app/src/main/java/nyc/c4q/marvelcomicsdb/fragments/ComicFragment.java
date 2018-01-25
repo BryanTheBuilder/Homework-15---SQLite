@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -38,6 +39,9 @@ public class ComicFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_comic, container, false);
+        ComicDataWrapper comicDataWrapper = new ComicDataWrapper();
+        TextView textView = rootView.findViewById(R.id.comic_attributionText);
+        textView.setText(comicDataWrapper.getAttributionText());
         try {
             getComicData();
         } catch (NoSuchAlgorithmException e) {
@@ -53,12 +57,12 @@ public class ComicFragment extends Fragment {
         call.enqueue(new Callback<ComicDataWrapper>() {
             @Override
             public void onResponse(Call<ComicDataWrapper> call, Response<ComicDataWrapper> response) {
-                Log.d("MARVEL CALLBACK", "onResponse: " + response.body().getEtag());
+                Log.d("COMIC CALLBACK", "onResponse: " + response.body().getEtag());
             }
 
             @Override
             public void onFailure(Call<ComicDataWrapper> call, Throwable t) {
-                Log.d("MARVEL CALLBACK", "onResponse: " + t.toString());
+                Log.d("COMIC CALLBACK", "onFailure: " + t.toString());
             }
         });
     }

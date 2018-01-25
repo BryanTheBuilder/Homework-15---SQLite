@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import nyc.c4q.marvelcomicsdb.model.creator.Image;
 
@@ -23,19 +24,17 @@ public class LoginActivity extends AppCompatActivity {
         background = findViewById(R.id.login_bgd);
 
         Button login = findViewById(R.id.button_login);
-        Button signUp = findViewById(R.id.button_create_account);
+        TextView signUp = findViewById(R.id.link_create_account);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
             }
         });
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, CreateAccountActivity.class));
-                finish();
             }
         });
         crossFadeBackground();

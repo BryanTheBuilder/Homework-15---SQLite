@@ -98,17 +98,17 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="@color/white" />
 
-            <Button
-                android:id="@+id/button_create_account"
+            <TextView
+                android:id="@+id/link_create_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginBottom="@dimen/fab_margin"
                 android:layout_marginEnd="@dimen/fab_margin"
                 android:layout_marginStart="@dimen/fab_margin"
-                android:background="@color/colorPrimaryDark"
                 android:padding="4dp"
-                android:text="Create Account"
+                android:text="New? Create Account"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="@color/white" />
         </LinearLayout>

@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     tools:context="nyc.c4q.marvelcomicsdb.CreateAccountActivity">
+
+    <ImageView
+        android:id="@+id/sign_up_bgd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:background="#cc000000"
         android:fitsSystemWindows="true">
 
         <LinearLayout
@@ -76,6 +82,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Password"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:textColor="@color/white" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/input_confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Re-Password"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
                     android:maxLength="25"
@@ -87,7 +111,9 @@
                 android:id="@+id/button_create_account"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_marginEnd="@dimen/fab_margin"
+                android:layout_marginStart="@dimen/fab_margin"
                 android:layout_marginTop="24dp"
                 android:background="@color/colorPrimaryDark"
                 android:padding="12dp"
@@ -98,7 +124,9 @@
                 android:id="@+id/link_login"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_marginEnd="@dimen/fab_margin"
+                android:layout_marginStart="@dimen/fab_margin"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
                 android:text="Already a member? Login"
@@ -107,4 +135,4 @@
 
         </LinearLayout>
     </ScrollView>
-</RelativeLayout>
+</FrameLayout>

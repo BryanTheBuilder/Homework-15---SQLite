@@ -4,8 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_login"
+    android:background="@color/colorPrimaryDark"
     tools:context="nyc.c4q.marvelcomicsdb.LoginActivity">
+
+    <ImageView
+        android:id="@+id/imageview_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/marvel_logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <EditText
         android:id="@+id/edit_text_email"
@@ -15,11 +23,9 @@
         android:background="@color/white"
         android:hint="Email"
         android:padding="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/imageview_logo" />
 
     <EditText
         android:id="@+id/edit_text_password"
@@ -52,18 +58,20 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         android:text="Login"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
         android:textColor="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/checkbox_remember_me" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <Button
+        android:id="@+id/button_create_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         android:padding="4dp"
         android:text="Create Account"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
         android:textColor="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

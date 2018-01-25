@@ -3,6 +3,8 @@ package nyc.c4q.marvelcomicsdb;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +14,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+
+import nyc.c4q.marvelcomicsdb.fragments.CharactersFragment;
+import nyc.c4q.marvelcomicsdb.fragments.ComicFragment;
+import nyc.c4q.marvelcomicsdb.fragments.CreatorFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private Button characters, comics, creators;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +48,43 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        characters = findViewById(R.id.button_characters);
+        characters.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CharactersFragment charactersFragment = new CharactersFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.drawer_layout, charactersFragment).addToBackStack("character");
+                fragmentTransaction.commit();
+            }
+        });
+
+        comics = findViewById(R.id.button_comics);
+        comics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ComicFragment comicFragment = new ComicFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.drawer_layout, comicFragment).addToBackStack("comic");
+                fragmentTransaction.commit();
+            }
+        });
+
+        creators = findViewById(R.id.button_creators);
+        creators.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreatorFragment creatorFragment = new CreatorFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.drawer_layout, creatorFragment).addToBackStack("creator");
+                fragmentTransaction.commit();
+            }
+        });
+
     }
 
     @Override

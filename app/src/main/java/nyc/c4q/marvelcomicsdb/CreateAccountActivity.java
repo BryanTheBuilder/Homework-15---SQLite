@@ -10,10 +10,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class CreateAccountActivity extends AppCompatActivity {
     private ImageView background;
+    private Button signIn, signUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,21 +21,24 @@ public class CreateAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
         background = findViewById(R.id.sign_up_bgd);
 
-        Button signUp = findViewById(R.id.button_create_account);
-        TextView login = findViewById(R.id.link_login);
+        signIn = findViewById(R.id.link_login);
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CreateAccountActivity.this, LoginActivity.class));
+                finish();
+            }
+        });
 
+        signUp = findViewById(R.id.button_create_account);
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CreateAccountActivity.this, MainActivity.class));
+                finish();
             }
         });
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(CreateAccountActivity.this, LoginActivity.class));
-            }
-        });
+
         crossFadeBackground();
     }
 

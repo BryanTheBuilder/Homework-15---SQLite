@@ -10,12 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import nyc.c4q.marvelcomicsdb.model.creator.Image;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
     private ImageView background;
+    private Button signIn, signUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,20 +22,24 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         background = findViewById(R.id.login_bgd);
 
-        Button login = findViewById(R.id.button_login);
-        TextView signUp = findViewById(R.id.link_create_account);
-        login.setOnClickListener(new View.OnClickListener() {
+        signIn = findViewById(R.id.button_login);
+        signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
             }
         });
+
+        signUp = findViewById(R.id.link_create_account);
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, CreateAccountActivity.class));
+                finish();
             }
         });
+
         crossFadeBackground();
     }
 

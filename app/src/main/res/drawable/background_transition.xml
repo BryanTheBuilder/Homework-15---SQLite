@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<transition xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/bgd_captian_america" />
-    <item android:drawable="@drawable/bgd_dare_devil" />
-    <item android:drawable="@drawable/bgd_hulk" />
-    <item android:drawable="@drawable/bgd_storm" />
-    <item android:drawable="@drawable/bgd_the_flash" />
-    <item android:drawable="@drawable/bgd_thor" />
-</transition>

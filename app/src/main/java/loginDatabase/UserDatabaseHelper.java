@@ -1,6 +1,5 @@
 package loginDatabase;
 
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -65,10 +64,27 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         return userList;
     }
 
-    public User getUser(String email, String password) {
+    public User getUserAuth(String email, String password) {
         User user = null;
         Cursor cursor = getReadableDatabase().rawQuery(
                 "SELECT * FROM " + TABLE_NAME + " WHERE email = '" + email + "' AND password = '" + password +
+                        "';", null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                user = new User(
+                        cursor.getString(cursor.getColumnIndex("name")),
+                        cursor.getString(cursor.getColumnIndex("email")),
+                        cursor.getString(cursor.getColumnIndex("password")));
+            }
+            return user;
+        }
+        return null;
+    }
+
+    public User getUserName(String name){
+        User user = null;
+        Cursor cursor = getReadableDatabase().rawQuery(
+                "SELECT * FROM " + TABLE_NAME + " WHERE name = '" + name +
                         "';", null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {

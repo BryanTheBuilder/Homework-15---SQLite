@@ -3,7 +3,6 @@ package nyc.c4q.marvelcomicsdb;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.graphics.ImageFormat;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Handler;
@@ -15,9 +14,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.database.sqlite.SQLiteDatabase;
-
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -25,6 +21,7 @@ import loginDatabase.User;
 import loginDatabase.UserDatabaseHelper;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String SHARED_PREFS_KEY = "sharedPrefsTesting";
     private EditText email, password;
     private ImageView background;
     private Button signIn, signUp;
@@ -37,18 +34,36 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         background = findViewById(R.id.login_bgd);
         checkBox = findViewById(R.id.checkbox_remember_me);
 
-        email = findViewById(R.id.email_entry);
-        password = findViewById(R.id.password_entry);
+        email = findViewById(R.id.edit_text_login_email);
+        password = findViewById(R.id.edit_text_login_password);
+
+        login = getApplicationContext().getSharedPreferences(SHARED_PREFS_KEY, MODE_PRIVATE);
+
+        if (login.getBoolean("isChecked", false)) {
+            email.setText(login.getString("email", null));
+            password.setText(login.getString("password", null));
+            checkBox.setChecked(login.getBoolean("isChecked", false));
+        }
 
         signIn = findViewById(R.id.button_login);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences.Editor editor = login.edit();
+                if (checkBox.isChecked()) {
+                    editor.putString("username", email.getText().toString());
+                    editor.putString("password", password.getText().toString());
+                    editor.putBoolean("isChecked", checkBox.isChecked());
+                    editor.commit();
+                } else {
+                    editor.putBoolean("isChecked", checkBox.isChecked());
+                    editor.commit();
+                }
                 verifyUser();
-
             }
         });
 
@@ -57,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, CreateAccountActivity.class));
-                finish();
             }
         });
 
@@ -65,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void crossFadeBackground() {
-        final int DrawableImage[] = {R.drawable.bgd_iron_man,R.drawable.bgd_spiderman,R.drawable.bgd_thor, R.drawable.bgd_storm, R.drawable.bgd_captian_america, R.drawable.bgd_dare_devil, R.drawable.bgd_hulk};
+        final int DrawableImage[] = {R.drawable.bgd_iron_man, R.drawable.bgd_spiderman, R.drawable.bgd_thor, R.drawable.bgd_storm, R.drawable.bgd_captian_america, R.drawable.bgd_dare_devil, R.drawable.bgd_hulk};
         final Handler handler = new Handler();
         final int[] i = {0};
         final int[] j = {1};
@@ -98,21 +112,36 @@ public class LoginActivity extends AppCompatActivity {
     public void verifyUser() {
         try {
             userDatabaseHelper = new UserDatabaseHelper(getApplicationContext());
-            user = userDatabaseHelper.getUser(email.getText().toString(), password.getText().toString());
+            user = userDatabaseHelper.getUserAuth(email.getText().toString(), password.getText().toString());
 
             List<User> userList = userDatabaseHelper.getUserList();
             for (User user : userList) {
-                Log.d("CHECK DATABASE", user.getName()+" "+user.getEmail()+" "+user.getPassword());
+                Log.d("CHECK DATABASE", user.getName() + " " + user.getEmail() + " " + user.getPassword());
             }
 
             if (user == null) {
                 email.setError("Please Enter a Valid Email");
-                password.setError("PLease Enter a Valid Password");
+                password.setError("Please Enter a Valid Password");
             } else {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+
+//                sharedPrefs();
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void sharedPrefs() {
+        String checkUser = "user" + email.getText().toString();
+        String checkPassword = "password" + email.getText().toString();
+
+        if (email.getText().toString().equalsIgnoreCase(login.getString(checkUser, null))
+                && password.getText().toString().equals(login.getString(checkPassword, null))) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra("currentUser", email.getText().toString());
+            startActivity(intent);
         }
     }
 }

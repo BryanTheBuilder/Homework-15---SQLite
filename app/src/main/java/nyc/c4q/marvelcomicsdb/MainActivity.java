@@ -1,5 +1,6 @@
 package nyc.c4q.marvelcomicsdb;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,144 +24,109 @@ import nyc.c4q.marvelcomicsdb.fragments.CreatorFragment;
 import nyc.c4q.marvelcomicsdb.model.comics.Comic;
 
 public class MainActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-  private Button characters, comics, creators;
+    private Button characters, comics, creators;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-     setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
+        String user = intent.getStringExtra("currentUser");
 
-    Toolbar toolbar = findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-    FloatingActionButton fab = findViewById(R.id.fab);
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show();
-      }
-    });
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
-    DrawerLayout drawer = findViewById(R.id.drawer_layout);
-    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-    drawer.addDrawerListener(toggle);
-    toggle.syncState();
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
-    NavigationView navigationView = findViewById(R.id.nav_view);
-    navigationView.setNavigationItemSelectedListener(this);
-//
-//    characters = findViewById(R.id.button_characters);
-//    characters.setOnClickListener(new View.OnClickListener() {
-//      @Override
-//      public void onClick(View v) {
-//        CharactersFragment charactersFragment = new CharactersFragment();
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.drawer_layout, charactersFragment)
-//            .addToBackStack("character");
-//        fragmentTransaction.commit();
-//      }
-//    });
-//
-//    comics = findViewById(R.id.button_comics);
-//    comics.setOnClickListener(new View.OnClickListener() {
-//      @Override
-//      public void onClick(View v) {
-//        ComicFragment comicFragment = new ComicFragment();
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.drawer_layout, comicFragment).addToBackStack("comic");
-//        fragmentTransaction.commit();
-//      }
-//    });
-//
-//    creators = findViewById(R.id.button_creators);
-//    creators.setOnClickListener(new View.OnClickListener() {
-//      @Override
-//      public void onClick(View v) {
-//        CreatorFragment creatorFragment = new CreatorFragment();
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.drawer_layout, creatorFragment).addToBackStack("creator");
-//        fragmentTransaction.commit();
-//      }
-//    });
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
-  }
-
-  @Override
-  public void onBackPressed() {
-    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-    if (drawer.isDrawerOpen(GravityCompat.START)) {
-      drawer.closeDrawer(GravityCompat.START);
-    } else {
-      super.onBackPressed();
-    }
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.main, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    // Handle action bar item clicks here. The action bar will
-    // automatically handle clicks on the Home/Up button, so long
-    // as you specify a parent activity in AndroidManifest.xml.
-    int id = item.getItemId();
-
-    //noinspection SimplifiableIfStatement
-    if (id == R.id.action_settings) {
-      return true;
     }
 
-    return super.onOptionsItemSelected(item);
-  }
-
-  @SuppressWarnings("StatementWithEmptyBody")
-  @Override
-  public boolean onNavigationItemSelected(MenuItem item) {
-    // Handle navigation view item clicks here.
-    Fragment fragment = null;
-    Class fragmentClass;
-
-    switch (item.getItemId()) {
-      case R.id.nav_characters:
-        fragmentClass = CharactersFragment.class;
-        break;
-      case R.id.nav_comic_books:
-        fragmentClass = ComicFragment.class;
-        break;
-      case R.id.nav_creators:
-        fragmentClass = CreatorFragment.class;
-        break;
-      default:
-        fragmentClass = CharactersFragment.class;
-        break;
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
-    try {
-      fragment = (Fragment) fragmentClass.newInstance();
-    } catch (InstantiationException e) {
-      e.printStackTrace();
-    } catch (IllegalAccessException e) {
-      e.printStackTrace();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    fragmentManager.beginTransaction().replace(R.id.main_frame, fragment).commit();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-    DrawerLayout drawer = findViewById(R.id.drawer_layout);
-    drawer.closeDrawer(GravityCompat.START);
-    return true;
-  }
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        Fragment fragment = null;
+        Class fragmentClass;
+
+        switch (item.getItemId()) {
+            case R.id.nav_characters:
+                fragmentClass = CharactersFragment.class;
+                break;
+            case R.id.nav_comic_books:
+                fragmentClass = ComicFragment.class;
+                break;
+            case R.id.nav_creators:
+                fragmentClass = CreatorFragment.class;
+                break;
+            default:
+                fragmentClass = CharactersFragment.class;
+                break;
+        }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.main_frame, fragment).commit();
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
 }

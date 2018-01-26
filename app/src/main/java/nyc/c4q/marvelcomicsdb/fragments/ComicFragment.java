@@ -30,6 +30,7 @@ public class ComicFragment extends Fragment {
   private static final Long TIMESTAMP = new Date().getTime();
   private static String privateAPI = PrivateAPI.getPrivateApiKey();
   private View rootView;
+  private TextView attributionText;
 
   public ComicFragment() {
     // Required empty public constructor
@@ -40,8 +41,7 @@ public class ComicFragment extends Fragment {
       Bundle savedInstanceState) {
     rootView = inflater.inflate(R.layout.fragment_comic, container, false);
     ComicDataWrapper comicDataWrapper = new ComicDataWrapper();
-    TextView textView = rootView.findViewById(R.id.comic_attributionText);
-    textView.setText(comicDataWrapper.getAttributionText());
+    attributionText = rootView.findViewById(R.id.character_attributionText_comic);
     try {
       getComicData();
     } catch (NoSuchAlgorithmException e) {
@@ -58,6 +58,7 @@ public class ComicFragment extends Fragment {
       @Override
       public void onResponse(Call<ComicDataWrapper> call, Response<ComicDataWrapper> response) {
         Log.d("COMIC CALLBACK", "onResponse: " + response.body().getEtag());
+        attributionText.setText(response.body().getAttributionText());
       }
 
       @Override

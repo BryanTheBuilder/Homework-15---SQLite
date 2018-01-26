@@ -41,6 +41,7 @@
                 android:layout_marginTop="8dp">
 
                 <EditText
+                    android:id="@+id/email_entry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/fab_margin"
@@ -61,7 +62,7 @@
                 android:layout_marginTop="8dp">
 
                 <EditText
-                    android:id="@+id/edit_text_password"
+                    android:id="@+id/password_entry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/fab_margin"

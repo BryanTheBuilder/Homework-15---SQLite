@@ -2,22 +2,21 @@
 <android.support.constraint.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content">
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
 
   <ImageView
-    android:id="@+id/character_thumbnail"
+    android:id="@+id/comic_thumbnail"
     android:layout_width="350dp"
     android:layout_height="240dp"
-    android:contentDescription="Profile_Pic"
+    android:contentDescription="comic_pic"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="parent"
     app:layout_constraintTop_toTopOf="parent"/>
 
   <TextView
-    android:id="@+id/character_name"
+    android:id="@+id/comic_name"
     android:textStyle="bold"
     android:layout_width="349dp"
     android:layout_height="50dp"
@@ -29,9 +28,9 @@
     android:textAlignment="center"
     android:textColor="#ffffffff"
     android:textSize="16sp"
-    app:layout_constraintBottom_toBottomOf="@+id/character_thumbnail"
-    app:layout_constraintEnd_toEndOf="@+id/character_thumbnail"
-    app:layout_constraintStart_toStartOf="@+id/character_thumbnail"/>
+    app:layout_constraintBottom_toBottomOf="@+id/comic_thumbnail"
+    app:layout_constraintEnd_toEndOf="@+id/comic_thumbnail"
+    app:layout_constraintStart_toStartOf="@+id/comic_thumbnail"/>
 
 
 </android.support.constraint.ConstraintLayout>

@@ -12,19 +12,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Creator Fragment"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
+    <android.support.v7.widget.RecyclerView
+      android:id="@+id/creator_rv"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
       app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-      android:id="@+id/character_attributionText_creator"
+      android:id="@+id/attributionText_creator"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:textSize="8sp"
+      android:textSize="12sp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"/>
   </android.support.constraint.ConstraintLayout>

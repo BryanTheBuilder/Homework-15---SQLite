@@ -6,7 +6,7 @@
   android:layout_height="wrap_content">
 
   <ImageView
-    android:id="@+id/comic_thumbnail"
+    android:id="@+id/creator_thumbnail"
     android:layout_width="350dp"
     android:layout_height="240dp"
     android:contentDescription="comic_pic"
@@ -16,7 +16,7 @@
     app:layout_constraintTop_toTopOf="parent"/>
 
   <TextView
-    android:id="@+id/comic_name"
+    android:id="@+id/creator_name"
     android:textStyle="bold"
     android:layout_width="349dp"
     android:layout_height="50dp"
@@ -26,9 +26,8 @@
     android:textAlignment="center"
     android:textColor="#ffffffff"
     android:textSize="16sp"
-    app:layout_constraintBottom_toBottomOf="@+id/comic_thumbnail"
-    app:layout_constraintEnd_toEndOf="@+id/comic_thumbnail"
-    app:layout_constraintStart_toStartOf="@+id/comic_thumbnail"/>
-
+    app:layout_constraintEnd_toEndOf="@id/creator_thumbnail"
+    app:layout_constraintStart_toStartOf="@id/creator_thumbnail"
+    app:layout_constraintBottom_toBottomOf="@id/creator_thumbnail"/>
 
 </android.support.constraint.ConstraintLayout>

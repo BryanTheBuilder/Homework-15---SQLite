@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,13 +19,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import java.io.IOException;
+import java.util.List;
+
+import nyc.c4q.marvelcomicsdb.API.NewsDBService;
+import nyc.c4q.marvelcomicsdb.Utils.PrivateAPI;
 import nyc.c4q.marvelcomicsdb.fragments.CharactersFragment;
 import nyc.c4q.marvelcomicsdb.fragments.ComicFragment;
 import nyc.c4q.marvelcomicsdb.fragments.CreatorFragment;
+import nyc.c4q.marvelcomicsdb.model.News.Articles;
+import nyc.c4q.marvelcomicsdb.model.News.NewsDataWrapper;
 import nyc.c4q.marvelcomicsdb.model.comics.Comic;
+import nyc.c4q.marvelcomicsdb.service.NewsDatabaseServiceGenerator;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static final NewsDBService marvelNewsCallback = NewsDatabaseServiceGenerator.createService();
 
     private Button characters, comics, creators;
 
@@ -56,7 +70,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        getMarvelNewsData();
     }
 
     @Override
@@ -127,6 +141,22 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void getMarvelNewsData() {
+        Call<NewsDataWrapper> call = marvelNewsCallback
+                .getNewsDiscover(PrivateAPI.getNewsApiKey());
+        call.enqueue(new Callback<NewsDataWrapper>() {
+            @Override
+            public void onResponse(Call<NewsDataWrapper> call, Response<NewsDataWrapper> response) {
+                    Log.d("News Callback", "onSuccess: " + response.isSuccessful());
+            }
+
+            @Override
+            public void onFailure(Call<NewsDataWrapper> call, Throwable t) {
+                Log.d("News Callback", "onFailure: ", t.fillInStackTrace());
+            }
+        });
     }
 
 }

@@ -1,7 +1,10 @@
 package nyc.c4q.marvelcomicsdb.fragments;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +13,17 @@ import android.widget.TextView;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Date;
 
+import java.util.List;
 import nyc.c4q.marvelcomicsdb.API.MarvelDBService;
 import nyc.c4q.marvelcomicsdb.R;
 import nyc.c4q.marvelcomicsdb.Utils.PrivateAPI;
+import nyc.c4q.marvelcomicsdb.model.character.Character;
 import nyc.c4q.marvelcomicsdb.model.character.CharacterDataWrapper;
 import nyc.c4q.marvelcomicsdb.service.MarvelDatabaseServiceGenerator;
+import nyc.c4q.marvelcomicsdb.controller.CharacterAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,7 +47,11 @@ public class CharactersFragment extends Fragment {
   private int limit;
   private int offset;
 
+  private TextView textView;
   private View rootView;
+  private RecyclerView recyclerView;
+  private List<Character> characterList = new ArrayList<>();
+  CharacterAdapter characterAdapter;
 
   public CharactersFragment() {
     // Required empty public constructor
@@ -50,8 +61,20 @@ public class CharactersFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     rootView = inflater.inflate(R.layout.fragment_characters, container, false);
-    TextView textView = rootView.findViewById(R.id.character_attributionText);
-    textView.setText("HELLO WORLD");
+    textView = rootView.findViewById(R.id.character_attributionText_character);
+    recyclerView = rootView.findViewById(R.id.character_rv);
+
+    if (getActivity().getApplication().getResources().getConfiguration().orientation
+        == Configuration.ORIENTATION_PORTRAIT) {
+      recyclerView
+          .setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 2));
+    } else {
+      recyclerView
+          .setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 3));
+    }
+
+    characterAdapter = new CharacterAdapter(characterList);
+
     try {
       getCharacterData();
     } catch (NoSuchAlgorithmException e) {
@@ -69,9 +92,8 @@ public class CharactersFragment extends Fragment {
       @Override
       public void onResponse(Call<CharacterDataWrapper> call,
           Response<CharacterDataWrapper> response) {
-        CharacterDataWrapper characterDataWrapper = new CharacterDataWrapper();
-        TextView textView = rootView.findViewById(R.id.character_attributionText);
-        textView.setText(characterDataWrapper.getAttributionText());
+        List<Character> responseList = response.body().getData().getResults();
+        recyclerView.setAdapter(new CharacterAdapter(responseList));
         Log.d("CHARACTER CALLBACK", "onResponse: " + response.body().getEtag());
       }
 

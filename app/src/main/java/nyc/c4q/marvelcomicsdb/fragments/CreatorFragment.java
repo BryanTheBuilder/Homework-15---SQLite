@@ -30,6 +30,7 @@ public class CreatorFragment extends Fragment {
     private static final Long TIMESTAMP = new Date().getTime();
     private static String privateAPI = PrivateAPI.getPrivateApiKey();
     private View rootView;
+    private TextView textView;
 
     public CreatorFragment() {
         // Required empty public constructor
@@ -39,6 +40,7 @@ public class CreatorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_creator, container, false);
+        textView = rootView.findViewById(R.id.character_attributionText_creator);
          try {
             getCreatorData();
         } catch (NoSuchAlgorithmException e) {
@@ -55,6 +57,7 @@ public class CreatorFragment extends Fragment {
             @Override
             public void onResponse(Call<CreatorDataWrapper> call, Response<CreatorDataWrapper> response) {
                 Log.d("CREATOR CALLBACK", "onResponse: " + response.body().getEtag());
+                textView.setText(response.body().getAttributionText());
             }
 
             @Override

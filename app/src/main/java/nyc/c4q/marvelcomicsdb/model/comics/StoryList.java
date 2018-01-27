@@ -6,7 +6,7 @@ import java.util.List;
 public class StoryList {
     private int available;
     private int returned;
-    private String collectionuri;
+    private String collectionURI;
     private List<StorySummary> items;
 
     public int getAvailable() {
@@ -17,8 +17,8 @@ public class StoryList {
         return returned;
     }
 
-    public String getCollectionuri() {
-        return collectionuri;
+    public String getCollectionURI() {
+        return collectionURI;
     }
 
     public List<StorySummary> getItems() {

@@ -39,7 +39,7 @@ public class ComicFragment extends Fragment {
   private View rootView;
   private TextView attributionText;
 
-  List<Comic> comiicResponseList = new ArrayList<>();
+  List<Comic> comicResponseList = new ArrayList<>();
   RecyclerView recyclerView;
   ComicAdapter comicAdapter;
 
@@ -63,7 +63,7 @@ public class ComicFragment extends Fragment {
           .setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 3));
     }
 
-    comicAdapter = new ComicAdapter(comiicResponseList);
+    comicAdapter = new ComicAdapter(comicResponseList);
 
     try {
       getComicData();
@@ -80,7 +80,7 @@ public class ComicFragment extends Fragment {
     call.enqueue(new Callback<ComicDataWrapper>() {
       @Override
       public void onResponse(Call<ComicDataWrapper> call, Response<ComicDataWrapper> response) {
-        Log.d("COMIC CALLBACK", "onResponse: " + response.body().getEtag());
+        Log.d("COMIC CALLBACK", "onSuccess: " + response.body().getEtag());
         List<Comic> responseList = response.body().getData().getResults();
         recyclerView.setAdapter(new ComicAdapter(responseList));
         attributionText.setText(response.body().getAttributionText());

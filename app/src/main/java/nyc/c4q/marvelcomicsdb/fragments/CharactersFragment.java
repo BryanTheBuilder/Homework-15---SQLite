@@ -94,7 +94,7 @@ public class CharactersFragment extends Fragment {
           Response<CharacterDataWrapper> response) {
         List<Character> responseList = response.body().getData().getResults();
         recyclerView.setAdapter(new CharacterAdapter(responseList));
-        Log.d("CHARACTER CALLBACK", "onResponse: " + response.body().getEtag());
+        Log.d("CHARACTER CALLBACK", "onSuccess: " + response.body().getEtag());
       }
 
       @Override

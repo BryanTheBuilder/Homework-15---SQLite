@@ -52,7 +52,7 @@ public class CreatorFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     rootView = inflater.inflate(R.layout.fragment_creator, container, false);
-    attributionText = rootView.findViewById(R.id.character_attributionText_creator);
+    attributionText = rootView.findViewById(R.id.attributionText_creator);
     recyclerView = rootView.findViewById(R.id.creator_rv);
 
     if (getActivity().getApplication().getResources().getConfiguration().orientation

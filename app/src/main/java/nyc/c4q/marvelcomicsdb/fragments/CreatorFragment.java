@@ -56,7 +56,7 @@ public class CreatorFragment extends Fragment {
         call.enqueue(new Callback<CreatorDataWrapper>() {
             @Override
             public void onResponse(Call<CreatorDataWrapper> call, Response<CreatorDataWrapper> response) {
-                Log.d("CREATOR CALLBACK", "onResponse: " + response.body().getEtag());
+                Log.d("CREATOR CALLBACK", "onSuccess: " + response.body().getEtag());
                 textView.setText(response.body().getAttributionText());
             }
 

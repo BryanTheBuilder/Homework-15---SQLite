@@ -11,7 +11,7 @@ public class Comic {
     private double issueNumber;
     private String variantDescription;
     private String description;
-    private Date modified;
+    private String modified;
     private String isbn;
     private String upc;
     private String diamondCode;
@@ -59,7 +59,7 @@ public class Comic {
         return description;
     }
 
-    public Date getModified() {
+    public String getModified() {
         return modified;
     }
 
@@ -166,13 +166,13 @@ public class Comic {
 
     private static class ComicDate {
         private String type;
-        private Date date;
+        private String date;
 
         public String getType() {
             return type;
         }
 
-        public Date getDate() {
+        public String getDate() {
             return date;
         }
     }

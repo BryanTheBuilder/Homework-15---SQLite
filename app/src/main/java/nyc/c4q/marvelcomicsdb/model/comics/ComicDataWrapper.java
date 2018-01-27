@@ -6,7 +6,7 @@ public class ComicDataWrapper {
     private String status;
     private String copyright;
     private String attributionText;
-    private String attributionhtml;
+    private String attributionHTML;
     private ComicDataContainer data;
     private String etag;
 
@@ -26,8 +26,8 @@ public class ComicDataWrapper {
         return attributionText;
     }
 
-    public String getAttributionhtml() {
-        return attributionhtml;
+    public String getAttributionHTML() {
+        return attributionHTML;
     }
 
     public ComicDataContainer getData() {

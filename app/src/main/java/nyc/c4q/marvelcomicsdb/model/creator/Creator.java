@@ -1,7 +1,5 @@
 package nyc.c4q.marvelcomicsdb.model.creator;
 
-
-import java.util.Date;
 import java.util.List;
 
 public class Creator {
@@ -9,7 +7,7 @@ public class Creator {
     private String firstName;
     private String lastName;
     private String fullName;
-    private Date modified;
+    private String modified;
     private String resourceURI;
     private List<Url> urls;
     private Image thumbnail;
@@ -34,7 +32,7 @@ public class Creator {
         return fullName;
     }
 
-    public Date getModified() {
+    public String getModified() {
         return modified;
     }
 

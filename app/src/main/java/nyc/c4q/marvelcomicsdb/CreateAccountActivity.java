@@ -128,7 +128,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         } else if (!confirmPassword.contentEquals(passwordInput)) {
             passwordVerify.requestFocus();
-            passwordVerify.setError("Password Doesn't Match");
+            passwordVerify.setError("Password Mismatch");
             return;
 
         } else {

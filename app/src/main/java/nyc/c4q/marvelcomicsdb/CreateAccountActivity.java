@@ -13,8 +13,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import loginDatabase.User;
-import loginDatabase.UserDatabaseHelper;
+import nyc.c4q.marvelcomicsdb.loginDatabase.User;
+import nyc.c4q.marvelcomicsdb.loginDatabase.UserDatabaseHelper;
 
 public class CreateAccountActivity extends AppCompatActivity {
     private Handler handler;

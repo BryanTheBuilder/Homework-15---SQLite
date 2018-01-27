@@ -1,4 +1,4 @@
-package loginDatabase;
+package nyc.c4q.marvelcomicsdb.loginDatabase;
 
 import android.content.Context;
 import android.database.Cursor;

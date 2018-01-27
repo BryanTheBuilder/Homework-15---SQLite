@@ -17,6 +17,8 @@ import loginDatabase.User;
 import loginDatabase.UserDatabaseHelper;
 
 public class CreateAccountActivity extends AppCompatActivity {
+    private Handler handler;
+    private Runnable runnable;
     private ImageView background;
     private TextView name, email, password, passwordVerify;
     private Button signIn, signUp;
@@ -51,13 +53,18 @@ public class CreateAccountActivity extends AppCompatActivity {
         crossFadeBackground();
     }
 
-    public void crossFadeBackground() {
-        final int DrawableImage[] = {R.drawable.bgd_iron_man,R.drawable.bgd_spiderman,R.drawable.bgd_thor, R.drawable.bgd_storm, R.drawable.bgd_captian_america, R.drawable.bgd_dare_devil, R.drawable.bgd_hulk};
+    @Override
+    protected void onPause() {
+        super.onPause();
+        handler.removeCallbacks(runnable);
+    }
 
-        final Handler handler = new Handler();
+    public void crossFadeBackground() {
+        final int DrawableImage[] = {R.drawable.bgd_iron_man, R.drawable.bgd_spiderman, R.drawable.bgd_thor, R.drawable.bgd_storm, R.drawable.bgd_captian_america, R.drawable.bgd_dare_devil, R.drawable.bgd_hulk};
+        handler = new Handler();
         final int[] i = {0};
         final int[] j = {1};
-        handler.postDelayed(new Runnable() {
+        runnable = new Runnable() {
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {
@@ -80,7 +87,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                     }
                 });
             }
-        }, 0);
+        };
+        handler.postDelayed(runnable, 0);
     }
 
     private void registerUser() {

@@ -22,6 +22,8 @@ import loginDatabase.UserDatabaseHelper;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String SHARED_PREFS_KEY = "sharedPrefsTesting";
+    private Handler handler;
+    private Runnable runnable;
     private EditText email, password;
     private ImageView background;
     private Button signIn, signUp;
@@ -78,35 +80,42 @@ public class LoginActivity extends AppCompatActivity {
         crossFadeBackground();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        handler.removeCallbacks(runnable);
+    }
+
     public void crossFadeBackground() {
         final int DrawableImage[] = {R.drawable.bgd_iron_man, R.drawable.bgd_spiderman, R.drawable.bgd_thor, R.drawable.bgd_storm, R.drawable.bgd_captian_america, R.drawable.bgd_dare_devil, R.drawable.bgd_hulk};
-        final Handler handler = new Handler();
+        handler = new Handler();
         final int[] i = {0};
         final int[] j = {1};
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Resources res = getApplicationContext().getResources();
-//                        TransitionDrawable out = new TransitionDrawable(new Drawable[]{res.getDrawable(DrawableImage[i[0]]), res.getDrawable(DrawableImage[j[0]])});
-//                        out.setCrossFadeEnabled(true);
-//                        background.setImageDrawable(out);
-//                        out.startTransition(6000);
-//                        i[0]++;
-//                        j[0]++;
-//                        if (j[0] == DrawableImage.length) {
-//                            j[0] = 0;
-//                        }
-//                        if (i[0] == DrawableImage.length) {
-//                            i[0] = 0;
-//                        }
-//                        handler.postDelayed(this, 6000);
-//                    }
-//                });
-//            }
-//        }, 0);
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Resources res = getApplicationContext().getResources();
+                        TransitionDrawable out = new TransitionDrawable(new Drawable[]{res.getDrawable(DrawableImage[i[0]]), res.getDrawable(DrawableImage[j[0]])});
+                        out.setCrossFadeEnabled(true);
+                        background.setImageDrawable(out);
+                        out.startTransition(6000);
+                        i[0]++;
+                        j[0]++;
+                        if (j[0] == DrawableImage.length) {
+                            j[0] = 0;
+                        }
+                        if (i[0] == DrawableImage.length) {
+                            i[0] = 0;
+                        }
+                        handler.postDelayed(this, 6000);
+                    }
+                });
+            }
+        };
+        handler.postDelayed(runnable, 0);
     }
 
     public void verifyUser() {

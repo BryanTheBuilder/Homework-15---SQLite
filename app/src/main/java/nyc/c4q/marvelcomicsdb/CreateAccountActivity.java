@@ -50,13 +50,13 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
         });
 
-        crossFadeBackground();
+//        crossFadeBackground();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        handler.removeCallbacks(runnable);
+//        handler.removeCallbacks(runnable);
     }
 
     public void crossFadeBackground() {

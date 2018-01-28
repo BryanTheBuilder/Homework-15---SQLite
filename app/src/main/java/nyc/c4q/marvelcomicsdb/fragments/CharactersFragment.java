@@ -62,7 +62,7 @@ public class CharactersFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     rootView = inflater.inflate(R.layout.fragment_characters, container, false);
-    textView = rootView.findViewById(R.id.character_attributionText_character);
+    textView = rootView.findViewById(R.id.attributionText_character);
     recyclerView = rootView.findViewById(R.id.character_rv);
 
     if (getActivity().getApplication().getResources().getConfiguration().orientation

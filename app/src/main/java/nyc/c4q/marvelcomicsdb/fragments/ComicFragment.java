@@ -51,7 +51,7 @@ public class ComicFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     rootView = inflater.inflate(R.layout.fragment_comic, container, false);
-    attributionText = rootView.findViewById(R.id.character_attributionText_comic);
+    attributionText = rootView.findViewById(R.id.attributionText_comic);
     recyclerView = rootView.findViewById(R.id.comics_rv);
 
     if (getActivity().getApplication().getResources().getConfiguration().orientation

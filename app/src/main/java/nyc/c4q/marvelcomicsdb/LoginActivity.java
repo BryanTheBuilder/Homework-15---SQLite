@@ -17,8 +17,8 @@ import android.widget.ImageView;
 
 import java.util.List;
 
-import loginDatabase.User;
-import loginDatabase.UserDatabaseHelper;
+import nyc.c4q.marvelcomicsdb.loginDatabase.User;
+import nyc.c4q.marvelcomicsdb.loginDatabase.UserDatabaseHelper;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String SHARED_PREFS_KEY = "sharedPrefsTesting";

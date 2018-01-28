@@ -7,6 +7,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -20,10 +22,12 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import nyc.c4q.marvelcomicsdb.API.NewsDBService;
 import nyc.c4q.marvelcomicsdb.Utils.PrivateAPI;
+import nyc.c4q.marvelcomicsdb.controller.NewsAdapter;
 import nyc.c4q.marvelcomicsdb.fragments.CharactersFragment;
 import nyc.c4q.marvelcomicsdb.fragments.ComicFragment;
 import nyc.c4q.marvelcomicsdb.fragments.CreatorFragment;
@@ -39,16 +43,19 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final NewsDBService marvelNewsCallback = NewsDatabaseServiceGenerator.createService();
-
-    private Button characters, comics, creators;
+    private RecyclerView newsRecyclerView;
+    private List<Articles> articlesList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
-        String user = intent.getStringExtra("currentUser");
+        newsRecyclerView = findViewById(R.id.news_rv);
+        NewsAdapter newsAdapter = new NewsAdapter(articlesList);
+        LinearLayoutManager newsLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        newsRecyclerView.setAdapter(newsAdapter);
+        newsRecyclerView.setLayoutManager(newsLayoutManager);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,6 +77,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
         getMarvelNewsData();
     }
 
@@ -149,7 +158,9 @@ public class MainActivity extends AppCompatActivity
         call.enqueue(new Callback<NewsDataWrapper>() {
             @Override
             public void onResponse(Call<NewsDataWrapper> call, Response<NewsDataWrapper> response) {
-                    Log.d("News Callback", "onSuccess: " + response.isSuccessful());
+                List<Articles> responseList = response.body().getArticles();
+                newsRecyclerView.setAdapter(new NewsAdapter(responseList));
+                Log.d("News Callback", "onSuccess: " + response.isSuccessful());
             }
 
             @Override

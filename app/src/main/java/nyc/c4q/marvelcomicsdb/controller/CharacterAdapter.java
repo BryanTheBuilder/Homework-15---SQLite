@@ -1,6 +1,10 @@
 package nyc.c4q.marvelcomicsdb.controller;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
@@ -9,11 +13,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
+import io.realm.Realm;
+import io.realm.internal.RealmNotifier;
 import nyc.c4q.marvelcomicsdb.controller.CharacterAdapter.CharacterViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 import nyc.c4q.marvelcomicsdb.R;
+import nyc.c4q.marvelcomicsdb.fragments.DetailsFragment;
 import nyc.c4q.marvelcomicsdb.model.character.Character;
+import nyc.c4q.marvelcomicsdb.service.RealmServiceManager;
 
 /**
  * Created by c4q on 1/26/18.
@@ -37,7 +45,8 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterViewHolder> 
   }
 
   @Override
-  public void onBindViewHolder(CharacterViewHolder holder, int position) {
+  public void onBindViewHolder(CharacterViewHolder holder, final int position) {
+
     StringBuilder url = new StringBuilder();
 
     url.append(characterResultsList.get(position).getThumbnail().getPath()).append(".")
@@ -47,7 +56,26 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterViewHolder> 
         .into(holder.thumbnail);
     String name = characterResultsList.get(position).getName();
     holder.characterName.setText(name);
+
+    holder.itemView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Realm realmOnclick = RealmServiceManager.getRealm();
+        realmOnclick.beginTransaction();
+        realmOnclick.copyToRealmOrUpdate(characterResultsList.get(position));
+        realmOnclick.commitTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putInt("Character_Id", characterResultsList.get(position).getId());
+        bundle.putString("Character_Name", characterResultsList.get(position).getName());
+
+        DetailsFragment detailsFragment = new DetailsFragment();
+        detailsFragment.setArguments(bundle);
+        FragmentManager manager = ((FragmentActivity) context).getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.main_frame, detailsFragment,"details").addToBackStack(null).commit();
+      }
+    });
   }
+
 
   @Override
   public int getItemCount() {

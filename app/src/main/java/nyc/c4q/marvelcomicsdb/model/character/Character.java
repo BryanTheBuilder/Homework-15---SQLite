@@ -1,63 +1,77 @@
 package nyc.c4q.marvelcomicsdb.model.character;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.Index;
+import io.realm.annotations.PrimaryKey;
 import java.util.Date;
 import java.util.List;
 
-public class Character {
-    private int id;
-    private String name;
-    private String description;
-    private Date modified;
-    private String resourceURI;
-    private List<Url> urls;
-    private Image thumbnail;
-    private ComicList comics;
-    private StoryList stories;
-    private EventList events;
-    private SeriesList series;
+public class Character extends RealmObject {
 
-    public int getId() {
-        return id;
-    }
+  @PrimaryKey
+  private int _id;
 
-    public String getName() {
-        return name;
-    }
+  @Index
+  private int id;
+  @Index
+  private String name;
 
-    public String getDescription() {
-        return description;
-    }
+  private String description;
+  private Date modified;
+  private String resourceURI;
+  private RealmList<Url> urls;
+  private Image thumbnail;
+  private ComicList comics;
+  private StoryList stories;
+  private EventList events;
+  private SeriesList series;
 
-    public Date getModified() {
-        return modified;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public String getResourceURI() {
-        return resourceURI;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public List<Url> getUrls() {
-        return urls;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public Image getThumbnail() {
-        return thumbnail;
-    }
+  public Date getModified() {
+    return modified;
+  }
 
-    public ComicList getComics() {
-        return comics;
-    }
+  public String getResourceURI() {
+    return resourceURI;
+  }
 
-    public StoryList getStories() {
-        return stories;
-    }
+  public RealmList<Url> getUrls() {
+    return urls;
+  }
 
-    public EventList getEvents() {
-        return events;
-    }
+  public Image getThumbnail() {
+    return thumbnail;
+  }
 
-    public SeriesList getSeries() {
-        return series;
-    }
+  public ComicList getComics() {
+    return comics;
+  }
+
+  public StoryList getStories() {
+    return stories;
+  }
+
+  public EventList getEvents() {
+    return events;
+  }
+
+  public SeriesList getSeries() {
+    return series;
+  }
+
 }

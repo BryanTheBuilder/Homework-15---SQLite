@@ -1,39 +1,32 @@
 package nyc.c4q.marvelcomicsdb.model.character;
 
+import io.realm.RealmList;
+import io.realm.RealmObject;
 import java.util.List;
+import nyc.c4q.marvelcomicsdb.model.comics.EventSummary;
 
-public class EventList {
-    private int available;
-    private int returned;
-    private String collectionURI;
-    private List<EventSummary> items;
+public class EventList extends RealmObject {
 
-    public int getAvailable() {
-        return available;
-    }
+  private int available;
+  private int returned;
+  private String collectionURI;
+  private RealmList<EventSummary> items;
 
-    public int getReturned() {
-        return returned;
-    }
+  public int getAvailable() {
+    return available;
+  }
 
-    public String getCollectionURI() {
-        return collectionURI;
-    }
+  public int getReturned() {
+    return returned;
+  }
 
-    public List<EventSummary> getItems() {
-        return items;
-    }
+  public String getCollectionURI() {
+    return collectionURI;
+  }
 
-    public static class EventSummary {
-        private String resourceURI;
-        private String name;
+  public RealmList<EventSummary> getItems() {
+    return items;
+  }
 
-        public String getResourceURI() {
-            return resourceURI;
-        }
 
-        public String getName() {
-            return name;
-        }
-    }
 }

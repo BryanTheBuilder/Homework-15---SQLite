@@ -1,6 +1,7 @@
 package nyc.c4q.marvelcomicsdb.service;
 
 
+import android.app.PendingIntent;
 import nyc.c4q.marvelcomicsdb.API.MarvelDBService;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

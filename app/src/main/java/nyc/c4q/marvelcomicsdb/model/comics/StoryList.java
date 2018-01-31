@@ -25,16 +25,4 @@ public class StoryList {
         return items;
     }
 
-    private static class StorySummary {
-        private String resourceURI;
-        private String name;
-
-        public String getResourceURI() {
-            return resourceURI;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
 }

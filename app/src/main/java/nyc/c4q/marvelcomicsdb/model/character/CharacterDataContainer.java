@@ -1,32 +1,34 @@
 package nyc.c4q.marvelcomicsdb.model.character;
 
 
+import io.realm.RealmObject;
 import java.util.List;
 
 public class CharacterDataContainer {
-    private int offset;
-    private int limit;
-    private int total;
-    private int count;
-    private List<Character> results;
 
-    public int getOffset() {
-        return offset;
-    }
+  private int offset;
+  private int limit;
+  private int total;
+  private int count;
+  private List<Character> results;
 
-    public int getLimit() {
-        return limit;
-    }
+  public int getOffset() {
+    return offset;
+  }
 
-    public int getTotal() {
-        return total;
-    }
+  public int getLimit() {
+    return limit;
+  }
 
-    public int getCount() {
-        return count;
-    }
+  public int getTotal() {
+    return total;
+  }
 
-    public List<Character> getResults() {
-        return results;
-    }
+  public int getCount() {
+    return count;
+  }
+
+  public List<Character> getResults() {
+    return results;
+  }
 }

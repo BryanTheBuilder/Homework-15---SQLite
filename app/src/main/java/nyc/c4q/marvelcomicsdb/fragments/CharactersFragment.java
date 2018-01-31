@@ -11,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import io.realm.Realm;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Queue;
 import nyc.c4q.marvelcomicsdb.API.MarvelDBService;
@@ -93,8 +95,14 @@ public class CharactersFragment extends Fragment {
       @Override
       public void onResponse(Call<CharacterDataWrapper> call,
           Response<CharacterDataWrapper> response) {
+
+        Realm realm = Realm.getDefaultInstance();
         List<Character> responseList = response.body().getData().getResults();
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(responseList);
+        realm.commitTransaction();
         recyclerView.setAdapter(new CharacterAdapter(responseList));
+
         Log.d("CHARACTER CALLBACK", "onSuccess: " + response.body().getEtag());
       }
 

@@ -1,15 +1,18 @@
 package nyc.c4q.marvelcomicsdb.model.character;
 
 
-public class Image {
-    private String path;
-    private String extension;
+import io.realm.RealmObject;
 
-    public String getPath() {
-        return path;
-    }
+public class Image extends RealmObject {
 
-    public String getExtension() {
-        return extension;
-    }
+  private String path;
+  private String extension;
+
+  public String getPath() {
+    return path;
+  }
+
+  public String getExtension() {
+    return extension;
+  }
 }

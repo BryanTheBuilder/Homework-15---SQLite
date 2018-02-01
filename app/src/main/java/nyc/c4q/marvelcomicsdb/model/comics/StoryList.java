@@ -1,13 +1,16 @@
 package nyc.c4q.marvelcomicsdb.model.comics;
 
 
+import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmObject;
 import java.util.List;
 
-public class StoryList {
+public class StoryList extends RealmObject {
     private int available;
     private int returned;
     private String collectionURI;
-    private List<StorySummary> items;
+    private RealmList<StorySummary> items;
 
     public int getAvailable() {
         return available;
@@ -21,7 +24,7 @@ public class StoryList {
         return collectionURI;
     }
 
-    public List<StorySummary> getItems() {
+    public RealmList<StorySummary> getItems() {
         return items;
     }
 

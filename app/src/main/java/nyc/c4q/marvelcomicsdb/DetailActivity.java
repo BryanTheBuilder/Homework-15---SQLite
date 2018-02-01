@@ -27,6 +27,8 @@ public class DetailActivity extends AppCompatActivity {
 
     Character character = realmRetrival.where(Character.class).contains("name", intentString)
         .findFirst();
+
+
     String path = character.getThumbnail().getPath();
     String extenstion = character.getThumbnail().getExtension();
     imageLoader(path, extenstion);

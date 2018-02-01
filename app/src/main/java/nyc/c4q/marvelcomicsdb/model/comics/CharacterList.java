@@ -1,45 +1,31 @@
 package nyc.c4q.marvelcomicsdb.model.comics;
 
 
+import io.realm.RealmList;
+import io.realm.RealmObject;
 import java.util.List;
 
-public class CharacterList {
-    private int available;
-    private int returned;
-    private String collectionuri;
-    private List<CharacterSummary> items;
+public class CharacterList extends RealmObject {
 
-    public int getAvailable() {
-        return available;
-    }
+  private int available;
+  private int returned;
+  private String collectionuri;
+  private RealmList<CharacterSummary> items;
 
-    public int getReturned() {
-        return returned;
-    }
+  public int getAvailable() {
+    return available;
+  }
 
-    public String getCollectionuri() {
-        return collectionuri;
-    }
+  public int getReturned() {
+    return returned;
+  }
 
-    public List<CharacterSummary> getItems() {
-        return items;
-    }
+  public String getCollectionuri() {
+    return collectionuri;
+  }
 
-    private static class CharacterSummary {
-        private String resourceuri;
-        private String name;
-        private String type;
+  public RealmList<CharacterSummary> getItems() {
+    return items;
+  }
 
-        public String getResourceuri() {
-            return resourceuri;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getType() {
-            return type;
-        }
-    }
 }

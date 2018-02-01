@@ -1,7 +1,9 @@
 package nyc.c4q.marvelcomicsdb.model.comics;
 
 
-public class Image {
+import io.realm.RealmObject;
+
+public class Image extends RealmObject {
     private String path;
     private String extension;
 

@@ -19,7 +19,6 @@ public class Character extends RealmObject {
   private int id;
   @Index
   private String name;
-
   @Index
   private boolean isFavorite;
 

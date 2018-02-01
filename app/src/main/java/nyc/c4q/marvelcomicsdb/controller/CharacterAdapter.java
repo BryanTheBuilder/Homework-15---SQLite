@@ -65,6 +65,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterViewHolder> 
         realmOnclick.beginTransaction();
         realmOnclick.copyToRealmOrUpdate(characterResultsList.get(position));
         realmOnclick.commitTransaction();
+
         Bundle bundle = new Bundle();
         bundle.putInt("Character_Id", characterResultsList.get(position).getId());
         bundle.putString("Character_Name", characterResultsList.get(position).getName());

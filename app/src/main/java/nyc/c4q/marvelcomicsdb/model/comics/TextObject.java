@@ -1,6 +1,8 @@
 package nyc.c4q.marvelcomicsdb.model.comics;
 
-public class TextObject {
+import io.realm.RealmObject;
+
+public class TextObject extends RealmObject {
     private String type;
     private String language;
     private String text;

@@ -1,45 +1,31 @@
 package nyc.c4q.marvelcomicsdb.model.comics;
 
 
-import java.util.List;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import nyc.c4q.marvelcomicsdb.model.creator.CreatorSummary;
 
-public class CreatorList {
-    private int available;
-    private int returned;
-    private String collectionURI;
-    private List<CreatorSummary> items;
+public class CreatorList extends RealmObject {
 
-    public int getAvailable() {
-        return available;
-    }
+  private int available;
+  private int returned;
+  private String collectionURI;
+  private RealmList<CreatorSummary> items;
 
-    public int getReturned() {
-        return returned;
-    }
+  public int getAvailable() {
+    return available;
+  }
 
-    public String getCollectionURI() {
-        return collectionURI;
-    }
+  public int getReturned() {
+    return returned;
+  }
 
-    public List<CreatorSummary> getItems() {
-        return items;
-    }
+  public String getCollectionURI() {
+    return collectionURI;
+  }
 
-    private static class CreatorSummary {
-        private String resourceURI;
-        private String name;
-        private String role;
+  public RealmList<CreatorSummary> getItems() {
+    return items;
+  }
 
-        public String getResourceURI() {
-            return resourceURI;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getRole() {
-            return role;
-        }
-    }
 }

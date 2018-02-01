@@ -1,192 +1,161 @@
 package nyc.c4q.marvelcomicsdb.model.comics;
 
 
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.Index;
 import java.util.Date;
 import java.util.List;
 
-public class Comic {
-    private int id;
-    private int digitalId;
-    private String title;
-    private double issueNumber;
-    private String variantDescription;
-    private String description;
-    private String modified;
-    private String isbn;
-    private String upc;
-    private String diamondCode;
-    private String ean;
-    private String issn;
-    private String format;
-    private int pageCount;
-    private List<TextObject> textObjects;
-    private String resourceURI;
-    private List<Url> urls;
-    private SeriesSummary series;
-    private List<ComicSummary> variants;
-    private List<ComicSummary> collections;
-    private List<ComicSummary> collectedIssues;
-    private List<ComicDate> dates;
-    private List<ComicPrice> prices;
-    private Image thumbnail;
-    private List<Image> images;
-    private CreatorList creators;
-    private CharacterList characters;
-    private StoryList stories;
-    private EventList events;
+public class Comic extends RealmObject {
 
-    public int getId() {
-        return id;
-    }
+  @Index
+  private int id;
+  @Index
+  private int digitalId;
+  @Index
+  private String title;
+  private double issueNumber;
+  private String variantDescription;
+  private String description;
+  private String modified;
+  private String isbn;
+  private String upc;
+  private String diamondCode;
+  private String ean;
+  private String issn;
+  private String format;
+  private int pageCount;
+  private RealmList<TextObject> textObjects;
+  private String resourceURI;
+  private RealmList<Url> urls;
+  private SeriesSummary series;
+  private RealmList<ComicSummary> variants;
+  private RealmList<ComicSummary> collections;
+  private RealmList<ComicSummary> collectedIssues;
+  private RealmList<ComicDate> dates;
+  private RealmList<ComicPrice> prices;
+  private Image thumbnail;
+  private RealmList<Image> images;
+  private CreatorList creators;
+  private CharacterList characters;
+  private StoryList stories;
+  private EventList events;
 
-    public int getDigitalId() {
-        return digitalId;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public int getDigitalId() {
+    return digitalId;
+  }
 
-    public double getIssueNumber() {
-        return issueNumber;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public String getVariantDescription() {
-        return variantDescription;
-    }
+  public double getIssueNumber() {
+    return issueNumber;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public String getVariantDescription() {
+    return variantDescription;
+  }
 
-    public String getModified() {
-        return modified;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public String getIsbn() {
-        return isbn;
-    }
+  public String getModified() {
+    return modified;
+  }
 
-    public String getUpc() {
-        return upc;
-    }
+  public String getIsbn() {
+    return isbn;
+  }
 
-    public String getDiamondCode() {
-        return diamondCode;
-    }
+  public String getUpc() {
+    return upc;
+  }
 
-    public String getEan() {
-        return ean;
-    }
+  public String getDiamondCode() {
+    return diamondCode;
+  }
 
-    public String getIssn() {
-        return issn;
-    }
+  public String getEan() {
+    return ean;
+  }
 
-    public String getFormat() {
-        return format;
-    }
+  public String getIssn() {
+    return issn;
+  }
 
-    public int getPageCount() {
-        return pageCount;
-    }
+  public String getFormat() {
+    return format;
+  }
 
-    public List<TextObject> getTextObjects() {
-        return textObjects;
-    }
+  public int getPageCount() {
+    return pageCount;
+  }
 
-    public String getResourceURI() {
-        return resourceURI;
-    }
+  public RealmList<TextObject> getTextObjects() {
+    return textObjects;
+  }
 
-    public List<Url> getUrls() {
-        return urls;
-    }
+  public String getResourceURI() {
+    return resourceURI;
+  }
 
-    public SeriesSummary getSeries() {
-        return series;
-    }
+  public RealmList<Url> getUrls() {
+    return urls;
+  }
 
-    public List<ComicSummary> getVariants() {
-        return variants;
-    }
+  public SeriesSummary getSeries() {
+    return series;
+  }
 
-    public List<ComicSummary> getCollections() {
-        return collections;
-    }
+  public RealmList<ComicSummary> getVariants() {
+    return variants;
+  }
 
-    public List<ComicSummary> getCollectedIssues() {
-        return collectedIssues;
-    }
+  public RealmList<ComicSummary> getCollections() {
+    return collections;
+  }
 
-    public List<ComicDate> getDates() {
-        return dates;
-    }
+  public RealmList<ComicSummary> getCollectedIssues() {
+    return collectedIssues;
+  }
 
-    public List<ComicPrice> getPrices() {
-        return prices;
-    }
+  public RealmList<ComicDate> getDates() {
+    return dates;
+  }
 
-    public Image getThumbnail() {
-        return thumbnail;
-    }
+  public RealmList<ComicPrice> getPrices() {
+    return prices;
+  }
 
-    public List<Image> getImages() {
-        return images;
-    }
+  public Image getThumbnail() {
+    return thumbnail;
+  }
 
-    public CreatorList getCreators() {
-        return creators;
-    }
+  public RealmList<Image> getImages() {
+    return images;
+  }
 
-    public CharacterList getCharacters() {
-        return characters;
-    }
+  public CreatorList getCreators() {
+    return creators;
+  }
 
-    public StoryList getStories() {
-        return stories;
-    }
+  public CharacterList getCharacters() {
+    return characters;
+  }
 
-    public EventList getEvents() {
-        return events;
-    }
+  public StoryList getStories() {
+    return stories;
+  }
 
-    private static class ComicSummary {
-        private String resourceURI;
-        private String name;
+  public EventList getEvents() {
+    return events;
+  }
 
-        public String getResourceURI() {
-            return resourceURI;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
-
-    private static class ComicDate {
-        private String type;
-        private String date;
-
-        public String getType() {
-            return type;
-        }
-
-        public String getDate() {
-            return date;
-        }
-    }
-
-    private static class ComicPrice {
-        private String type;
-        private float price;
-
-        public String getType() {
-            return type;
-        }
-
-        public float getPrice() {
-            return price;
-        }
-    }
 }

@@ -20,7 +20,8 @@ public class RealmServiceManager {
     if (realmConfiguration == null) {
       Log.d(TAG, "onRealm configuration");
       setRealmConfiguration(
-          new RealmConfiguration.Builder().name("favorites").schemaVersion(1).build());
+          new RealmConfiguration.Builder().name("favorites")
+              .deleteRealmIfMigrationNeeded().build());
     }
   }
 

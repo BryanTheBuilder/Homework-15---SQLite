@@ -1,14 +1,10 @@
 package nyc.c4q.marvelcomicsdb.model.character;
 
-
-import android.os.Parcel;
-import android.os.Parcelable;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.Index;
 import io.realm.annotations.PrimaryKey;
 import java.util.Date;
-import java.util.List;
 
 public class Character extends RealmObject {
 
@@ -30,10 +26,10 @@ public class Character extends RealmObject {
   private Date modified;
   private String resourceURI;
   private RealmList<Url> urls;
-  private Image thumbnail;
+  private CharacterImage thumbnail;
   private ComicList comics;
-  private StoryList stories;
-  private EventList events;
+  private CharacterStoryList stories;
+  private CharacterEventList events;
   private SeriesList series;
 
   public int getId() {
@@ -60,7 +56,7 @@ public class Character extends RealmObject {
     return urls;
   }
 
-  public Image getThumbnail() {
+  public CharacterImage getThumbnail() {
     return thumbnail;
   }
 
@@ -68,11 +64,11 @@ public class Character extends RealmObject {
     return comics;
   }
 
-  public StoryList getStories() {
+  public CharacterStoryList getStories() {
     return stories;
   }
 
-  public EventList getEvents() {
+  public CharacterEventList getEvents() {
     return events;
   }
 

@@ -4,11 +4,12 @@ package nyc.c4q.marvelcomicsdb.model.comics;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.Index;
-import java.util.Date;
-import java.util.List;
+import io.realm.annotations.PrimaryKey;
 
 public class Comic extends RealmObject {
 
+  @PrimaryKey
+  private long _id;
   @Index
   private int id;
   @Index
@@ -28,7 +29,7 @@ public class Comic extends RealmObject {
   private int pageCount;
   private RealmList<TextObject> textObjects;
   private String resourceURI;
-  private RealmList<Url> urls;
+  private RealmList<ComicUrl> comicUrls;
   private SeriesSummary series;
   private RealmList<ComicSummary> variants;
   private RealmList<ComicSummary> collections;
@@ -106,8 +107,8 @@ public class Comic extends RealmObject {
     return resourceURI;
   }
 
-  public RealmList<Url> getUrls() {
-    return urls;
+  public RealmList<ComicUrl> getComicUrls() {
+    return comicUrls;
   }
 
   public SeriesSummary getSeries() {

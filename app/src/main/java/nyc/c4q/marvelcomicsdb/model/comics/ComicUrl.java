@@ -1,6 +1,9 @@
 package nyc.c4q.marvelcomicsdb.model.comics;
 
-public class Url {
+import io.realm.Realm;
+import io.realm.RealmObject;
+
+public class ComicUrl extends RealmObject{
     private String type;
     private String url;
 

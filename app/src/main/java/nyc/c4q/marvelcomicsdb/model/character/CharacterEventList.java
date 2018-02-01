@@ -2,15 +2,18 @@ package nyc.c4q.marvelcomicsdb.model.character;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
-import java.util.List;
 import nyc.c4q.marvelcomicsdb.model.comics.EventSummary;
 
-public class EventList extends RealmObject {
+/**
+ * Created by c4q on 2/1/18.
+ */
+
+public class CharacterEventList extends RealmObject {
 
   private int available;
   private int returned;
   private String collectionURI;
-  private RealmList<EventSummary> items;
+  private RealmList<CharacterEventSummary> items;
 
   public int getAvailable() {
     return available;
@@ -24,9 +27,8 @@ public class EventList extends RealmObject {
     return collectionURI;
   }
 
-  public RealmList<EventSummary> getItems() {
+  public RealmList<CharacterEventSummary> getItems() {
     return items;
   }
-
 
 }

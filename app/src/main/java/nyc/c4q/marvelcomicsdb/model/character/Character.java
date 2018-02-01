@@ -20,6 +20,13 @@ public class Character extends RealmObject {
   @Index
   private String name;
 
+  @Index
+  private boolean isFavorite;
+
+  public void setFavorite(boolean favorite) {
+    isFavorite = favorite;
+  }
+
   private String description;
   private Date modified;
   private String resourceURI;

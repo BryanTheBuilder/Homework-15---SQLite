@@ -1,6 +1,7 @@
 package nyc.c4q.marvelcomicsdb.controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -15,11 +16,11 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import io.realm.Realm;
 import io.realm.internal.RealmNotifier;
+import nyc.c4q.marvelcomicsdb.DetailActivity;
 import nyc.c4q.marvelcomicsdb.controller.CharacterAdapter.CharacterViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 import nyc.c4q.marvelcomicsdb.R;
-import nyc.c4q.marvelcomicsdb.fragments.DetailsFragment;
 import nyc.c4q.marvelcomicsdb.model.character.Character;
 import nyc.c4q.marvelcomicsdb.service.RealmServiceManager;
 
@@ -68,10 +69,10 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterViewHolder> 
         bundle.putInt("Character_Id", characterResultsList.get(position).getId());
         bundle.putString("Character_Name", characterResultsList.get(position).getName());
 
-        DetailsFragment detailsFragment = new DetailsFragment();
-        detailsFragment.setArguments(bundle);
-        FragmentManager manager = ((FragmentActivity) context).getSupportFragmentManager();
-        manager.beginTransaction().replace(R.id.main_frame, detailsFragment,"details").addToBackStack(null).commit();
+        Intent detailIntent = new Intent(context, DetailActivity.class);
+        detailIntent.putExtra("Char_Id", characterResultsList.get(position).getId());
+        detailIntent.putExtra("Char_Name", characterResultsList.get(position).getName());
+        context.startActivity(detailIntent);
       }
     });
   }

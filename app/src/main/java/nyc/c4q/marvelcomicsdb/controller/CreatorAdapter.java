@@ -20,7 +20,6 @@ import nyc.c4q.marvelcomicsdb.R;
 import nyc.c4q.marvelcomicsdb.controller.CreatorAdapter.CreatorViewHolder;
 import nyc.c4q.marvelcomicsdb.model.creator.Creator;
 import nyc.c4q.marvelcomicsdb.service.RealmServiceManager;
-import org.w3c.dom.Text;
 
 /**
  * Created by c4q on 1/26/18.
@@ -28,20 +27,24 @@ import org.w3c.dom.Text;
 
 public class CreatorAdapter extends RecyclerView.Adapter<CreatorViewHolder> {
 
-  Context context;
-  List<Creator> creatorResponseList = new ArrayList<>();
+    Context context;
+    List<Creator> creatorResponseList = new ArrayList<>();
 
-  public CreatorAdapter(
-      List<Creator> creatorResponseList) {
-    this.creatorResponseList = creatorResponseList;
-  }
+    public CreatorAdapter(
+            List<Creator> creatorResponseList) {
+        this.creatorResponseList = creatorResponseList;
+    }
 
-  @Override
-  public CreatorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    context = parent.getContext();
-    View view = LayoutInflater.from(context).inflate(R.layout.creator_item, parent, false);
-    return new CreatorViewHolder(view);
-  }
+    @Override
+    public CreatorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        context = parent.getContext();
+        View view = LayoutInflater.from(context).inflate(R.layout.creator_item, parent, false);
+        return new CreatorViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(CreatorViewHolder holder, int position) {
+        StringBuilder url = new StringBuilder();
 
   @Override
   public void onBindViewHolder(CreatorViewHolder holder, final int position) {
@@ -70,20 +73,19 @@ public class CreatorAdapter extends RecyclerView.Adapter<CreatorViewHolder> {
     });
   }
 
-  @Override
-  public int getItemCount() {
-    return (creatorResponseList == null) ? 0 : creatorResponseList.size();
-  }
+    }
 
-  public class CreatorViewHolder extends ViewHolder {
+    @Override
+    public int getItemCount() {
+        return (creatorResponseList == null) ? 0 : creatorResponseList.size();
+    }
 
-    ImageView creatorThumbnail;
-    TextView creatorName;
+    public class CreatorViewHolder extends ViewHolder {
 
-    public CreatorViewHolder(View itemView) {
+      public CreatorViewHolder(View itemView) {
       super(itemView);
       creatorThumbnail = itemView.findViewById(R.id.creator_thumbnail);
       creatorName = itemView.findViewById(R.id.creator_name);
+      }
     }
-  }
 }

@@ -55,6 +55,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicViewHolder> {
     holder.comicTitle.setText(name);
     Picasso.with(context).load(url.toString())
         .into(holder.comicThumbnail);
+
     holder.itemView.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {

@@ -1,66 +1,74 @@
 package nyc.c4q.marvelcomicsdb.model.creator;
 
-import java.util.List;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.Index;
+import io.realm.annotations.PrimaryKey;
 
-public class Creator {
-    private int id;
-    private String firstName;
-    private String lastName;
-    private String fullName;
-    private String modified;
-    private String resourceURI;
-    private List<Url> urls;
-    private Image thumbnail;
-    private SeriesList series;
-    private StoryList stories;
-    private ComicList comics;
-    private EventList events;
+public class Creator extends RealmObject {
 
-    public int getId() {
-        return id;
-    }
+  @PrimaryKey
+  private long _id;
+  @Index
+  private int id;
+  private String firstName;
+  private String lastName;
+  @Index
+  private String fullName;
+  private String modified;
+  private String resourceURI;
+  private RealmList<CreatorUrl> urls;
+  private CreatorImage thumbnail;
+  private CreatorSeriesList series;
+  private CreatorStoryList stories;
+  private CreatorComicList comics;
+  private CreatorEventList events;
 
-    public String getFirstName() {
-        return firstName;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public String getLastName() {
-        return lastName;
-    }
+  public String getFirstName() {
+    return firstName;
+  }
 
-    public String getFullName() {
-        return fullName;
-    }
+  public String getLastName() {
+    return lastName;
+  }
 
-    public String getModified() {
-        return modified;
-    }
+  public String getFullName() {
+    return fullName;
+  }
 
-    public String getResourceURI() {
-        return resourceURI;
-    }
+  public String getModified() {
+    return modified;
+  }
 
-    public List<Url> getUrls() {
-        return urls;
-    }
+  public String getResourceURI() {
+    return resourceURI;
+  }
 
-    public Image getThumbnail() {
-        return thumbnail;
-    }
+  public RealmList<CreatorUrl> getUrls() {
+    return urls;
+  }
 
-    public SeriesList getSeries() {
-        return series;
-    }
+  public CreatorImage getThumbnail() {
+    return thumbnail;
+  }
 
-    public StoryList getStories() {
-        return stories;
-    }
+  public CreatorSeriesList getSeries() {
+    return series;
+  }
 
-    public ComicList getComics() {
-        return comics;
-    }
+  public CreatorStoryList getStories() {
+    return stories;
+  }
 
-    public EventList getEvents() {
-        return events;
-    }
+  public CreatorComicList getComics() {
+    return comics;
+  }
+
+  public CreatorEventList getEvents() {
+    return events;
+  }
 }

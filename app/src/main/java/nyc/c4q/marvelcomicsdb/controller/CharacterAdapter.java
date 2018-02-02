@@ -69,8 +69,8 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterViewHolder> 
 
         Intent detailIntent = new Intent(context, DetailActivity.class);
         detailIntent.putExtra("object_type", "character");
-        detailIntent.putExtra("Char_Id", characterResultsList.get(position).getId());
-        detailIntent.putExtra("Char_Name", characterResultsList.get(position).getName());
+        detailIntent.putExtra("char_id", characterResultsList.get(position).getId());
+        detailIntent.putExtra("char_name", characterResultsList.get(position).getName());
         context.startActivity(detailIntent);
       }
     });

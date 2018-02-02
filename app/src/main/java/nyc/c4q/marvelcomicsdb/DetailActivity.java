@@ -7,6 +7,7 @@ import com.squareup.picasso.Picasso;
 import io.realm.Realm;
 import nyc.c4q.marvelcomicsdb.model.character.Character;
 import nyc.c4q.marvelcomicsdb.model.comics.Comic;
+import nyc.c4q.marvelcomicsdb.model.creator.Creator;
 import nyc.c4q.marvelcomicsdb.service.RealmServiceManager;
 
 public class DetailActivity extends AppCompatActivity {
@@ -20,10 +21,10 @@ public class DetailActivity extends AppCompatActivity {
     imageView = findViewById(R.id.character_detail_image);
     Bundle extras = getIntent().getExtras();
     String object_type = extras.getString("object_type");
-    realmReceptionSwitch(object_type , extras);
+    realmReceptionSwitch(object_type, extras);
   }
 
-  private void realmReceptionSwitch(String object_type , Bundle extras) {
+  private void realmReceptionSwitch(String object_type, Bundle extras) {
     Realm realmRetrival = RealmServiceManager.getRealm();
 
     String path;
@@ -31,7 +32,7 @@ public class DetailActivity extends AppCompatActivity {
     switch (object_type) {
       case "character":
         Character character = realmRetrival.where(Character.class)
-            .contains("name", extras.getString("Char_Name"))
+            .contains("name", extras.getString("char_name"))
             .findFirst();
         path = character.getThumbnail().getPath();
         extension = character.getThumbnail().getExtension();
@@ -43,6 +44,14 @@ public class DetailActivity extends AppCompatActivity {
             .findFirst();
         path = comic.getThumbnail().getPath();
         extension = comic.getThumbnail().getExtension();
+        imageLoader(path, extension);
+        break;
+      case "creator":
+        Creator creator = realmRetrival.where(Creator.class)
+            .contains("fullName", extras.getString("creator_id"))
+            .findFirst();
+        path = creator.getThumbnail().getPath();
+        extension = creator.getThumbnail().getExtension();
         imageLoader(path, extension);
         break;
     }

@@ -24,6 +24,14 @@ public class Creator extends RealmObject {
   private CreatorComicList comics;
   private CreatorEventList events;
 
+  @Index
+  private boolean isFavorite;
+
+  public void setFavorite(boolean favorite) {
+    isFavorite = favorite;
+  }
+
+
   public int getId() {
     return id;
   }

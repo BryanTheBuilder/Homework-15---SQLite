@@ -22,6 +22,10 @@ public class Character extends RealmObject {
     isFavorite = favorite;
   }
 
+  public boolean getFavorite(){
+    return isFavorite;
+  }
+
   private String description;
   private Date modified;
   private String resourceURI;

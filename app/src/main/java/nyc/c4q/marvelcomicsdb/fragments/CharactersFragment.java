@@ -27,6 +27,7 @@ import nyc.c4q.marvelcomicsdb.model.character.Character;
 import nyc.c4q.marvelcomicsdb.model.character.CharacterDataWrapper;
 import nyc.c4q.marvelcomicsdb.service.MarvelDatabaseServiceGenerator;
 import nyc.c4q.marvelcomicsdb.controller.CharacterAdapter;
+import nyc.c4q.marvelcomicsdb.service.RealmServiceManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -95,14 +96,8 @@ public class CharactersFragment extends Fragment {
       @Override
       public void onResponse(Call<CharacterDataWrapper> call,
           Response<CharacterDataWrapper> response) {
-
-        Realm realm = Realm.getDefaultInstance();
         List<Character> responseList = response.body().getData().getResults();
-        realm.beginTransaction();
-        realm.copyToRealmOrUpdate(responseList);
-        realm.commitTransaction();
         recyclerView.setAdapter(new CharacterAdapter(responseList));
-
         Log.d("CHARACTER CALLBACK", "onSuccess: " + response.body().getEtag());
       }
 

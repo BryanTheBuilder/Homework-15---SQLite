@@ -38,13 +38,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
                 .into(holder.articleImage);
 
         String title = articlesList.get(position).getTitle();
-        holder.articleAuthor.setText(title);
+        holder.articleTitle.setText(title);
 
         String author = articlesList.get(position).getAuthor();
-        holder.articleAuthor.setText(author);
+        holder.articleAuthor.setText("By " + author);
 
         String description = articlesList.get(position).getDescription();
-        holder.articleAuthor.setText(description);
+        holder.articleDescription.setText(description);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
         public NewsViewHolder(View itemView) {
             super(itemView);
-            articleTitle = itemView.findViewById(R.id.aritcle_title);
+            articleTitle = itemView.findViewById(R.id.article_title);
             articleAuthor = itemView.findViewById(R.id.article_author);
             articleDescription = itemView.findViewById(R.id.article_description);
             articleImage = itemView.findViewById(R.id.article_image);

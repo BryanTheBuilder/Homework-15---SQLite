@@ -10,11 +10,14 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.squareup.picasso.Picasso;
+
 import io.realm.Realm;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
+
 import nyc.c4q.marvelcomicsdb.DetailActivity;
 import nyc.c4q.marvelcomicsdb.R;
 import nyc.c4q.marvelcomicsdb.controller.CreatorAdapter.CreatorViewHolder;
@@ -43,36 +46,27 @@ public class CreatorAdapter extends RecyclerView.Adapter<CreatorViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(CreatorViewHolder holder, int position) {
+    public void onBindViewHolder(CreatorViewHolder holder, final int position) {
         StringBuilder url = new StringBuilder();
-
-  @Override
-  public void onBindViewHolder(CreatorViewHolder holder, final int position) {
-
-    StringBuilder url = new StringBuilder();
-    url.append(creatorResponseList.get(position).getThumbnail().getPath()).append(".")
-        .append(creatorResponseList.get(position).getThumbnail().getExtension());
-    String name = creatorResponseList.get(position).getFullName();
-    holder.creatorName.setText(name);
-    Picasso.with(context).load(url.toString()).into(holder.creatorThumbnail);
-
-    holder.itemView.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Realm realmOnClick = RealmServiceManager.getRealm();
-        realmOnClick.beginTransaction();
-        realmOnClick.copyToRealmOrUpdate(creatorResponseList.get(position));
-        realmOnClick.commitTransaction();
-
-        Intent detailIntent = new Intent(context, DetailActivity.class);
-        detailIntent.putExtra("object_type", "creator");
-        detailIntent.putExtra("creator_id", creatorResponseList.get(position).getId());
-        detailIntent.putExtra("creator_name", creatorResponseList.get(position).getFullName());
-        context.startActivity(detailIntent);
-      }
-    });
-  }
-
+        url.append(creatorResponseList.get(position).getThumbnail().getPath()).append(".")
+                .append(creatorResponseList.get(position).getThumbnail().getExtension());
+        String name = creatorResponseList.get(position).getFullName();
+        holder.creatorName.setText(name);
+        Picasso.with(context).load(url.toString()).into(holder.creatorThumbnail);
+        holder.itemView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Realm realmOnClick = RealmServiceManager.getRealm();
+                realmOnClick.beginTransaction();
+                realmOnClick.copyToRealmOrUpdate(creatorResponseList.get(position));
+                realmOnClick.commitTransaction();
+                Intent detailIntent = new Intent(context, DetailActivity.class);
+                detailIntent.putExtra("object_type", "creator");
+                detailIntent.putExtra("creator_id", creatorResponseList.get(position).getId());
+                detailIntent.putExtra("creator_name", creatorResponseList.get(position).getFullName());
+                context.startActivity(detailIntent);
+            }
+        });
     }
 
     @Override
@@ -81,11 +75,13 @@ public class CreatorAdapter extends RecyclerView.Adapter<CreatorViewHolder> {
     }
 
     public class CreatorViewHolder extends ViewHolder {
+        ImageView creatorThumbnail;
+        TextView creatorName;
 
-      public CreatorViewHolder(View itemView) {
-      super(itemView);
-      creatorThumbnail = itemView.findViewById(R.id.creator_thumbnail);
-      creatorName = itemView.findViewById(R.id.creator_name);
-      }
+        public CreatorViewHolder(View itemView) {
+            super(itemView);
+            creatorThumbnail = itemView.findViewById(R.id.creator_thumbnail);
+            creatorName = itemView.findViewById(R.id.creator_name);
+        }
     }
 }

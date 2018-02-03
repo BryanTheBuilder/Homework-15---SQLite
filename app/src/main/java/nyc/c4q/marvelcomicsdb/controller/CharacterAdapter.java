@@ -1,5 +1,7 @@
 package nyc.c4q.marvelcomicsdb.controller;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,10 +65,15 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterViewHolder> 
       @Override
       public void onClick(View v) {
         Realm realmOnclick = RealmServiceManager.getRealm();
-        realmOnclick.beginTransaction();
-        realmOnclick.copyToRealmOrUpdate(characterResultsList.get(position));
-        realmOnclick.commitTransaction();
 
+        realmOnclick.beginTransaction();
+
+        realmOnclick.copyToRealmOrUpdate(characterResultsList.get(position));
+
+        List<Character> currentList = realmOnclick.where(Character.class).findAll();
+        Log.d(TAG, "currentDBSize: " + currentList.size());
+
+        realmOnclick.commitTransaction();
 
         Intent detailIntent = new Intent(context, DetailActivity.class);
         detailIntent.putExtra("object_type", "character");

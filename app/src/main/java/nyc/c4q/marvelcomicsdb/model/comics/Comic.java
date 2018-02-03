@@ -16,6 +16,8 @@ public class Comic extends RealmObject {
   private int digitalId;
   @Index
   private String title;
+
+
   private double issueNumber;
   private String variantDescription;
   private String description;
@@ -42,6 +44,13 @@ public class Comic extends RealmObject {
   private CharacterList characters;
   private StoryList stories;
   private EventList events;
+
+  @Index
+  private boolean isFavorite;
+
+  public void setFavorite(boolean favorite) {
+    isFavorite = favorite;
+  }
 
   public int getId() {
     return id;

@@ -1,12 +1,10 @@
 package nyc.c4q.marvelcomicsdb;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,30 +17,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-
-import io.realm.DynamicRealm;
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.RealmMigration;
-import io.realm.RealmSchema;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
 import nyc.c4q.marvelcomicsdb.API.NewsDBService;
 import nyc.c4q.marvelcomicsdb.Utils.PrivateAPI;
 import nyc.c4q.marvelcomicsdb.controller.NewsAdapter;
 import nyc.c4q.marvelcomicsdb.fragments.CharactersFragment;
 import nyc.c4q.marvelcomicsdb.fragments.ComicFragment;
 import nyc.c4q.marvelcomicsdb.fragments.CreatorFragment;
+import nyc.c4q.marvelcomicsdb.fragments.FavoritesFragment;
 import nyc.c4q.marvelcomicsdb.model.News.Articles;
 import nyc.c4q.marvelcomicsdb.model.News.NewsDataWrapper;
-import nyc.c4q.marvelcomicsdb.model.comics.Comic;
 import nyc.c4q.marvelcomicsdb.service.NewsDatabaseServiceGenerator;
 import nyc.c4q.marvelcomicsdb.service.RealmServiceManager;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,6 +41,7 @@ public class MainActivity extends AppCompatActivity
 
   private static final NewsDBService marvelNewsCallback = NewsDatabaseServiceGenerator
       .createService();
+
   private RecyclerView newsRecyclerView;
   private List<Articles> articlesList = new ArrayList<>();
 
@@ -126,7 +116,6 @@ public class MainActivity extends AppCompatActivity
     return super.onOptionsItemSelected(item);
   }
 
-  @SuppressWarnings("StatementWithEmptyBody")
   @Override
   public boolean onNavigationItemSelected(MenuItem item) {
     // Handle navigation view item clicks here.
@@ -143,8 +132,11 @@ public class MainActivity extends AppCompatActivity
       case R.id.nav_creators:
         fragmentClass = CreatorFragment.class;
         break;
+      case R.id.nav_favorites:
+        fragmentClass = FavoritesFragment.class;
+        break;
       default:
-        fragmentClass = CharactersFragment.class;
+        fragmentClass = null;
         break;
     }
 
@@ -156,11 +148,14 @@ public class MainActivity extends AppCompatActivity
       e.printStackTrace();
     }
 
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    fragmentManager.beginTransaction().replace(R.id.main_frame, fragment).addToBackStack(null).commit();
+    if (fragment != null) {
+      FragmentManager fragmentManager = getSupportFragmentManager();
+      fragmentManager.beginTransaction().replace(R.id.main_frame, fragment).addToBackStack(null)
+          .commit();
 
-    DrawerLayout drawer = findViewById(R.id.drawer_layout);
-    drawer.closeDrawer(GravityCompat.START);
+      DrawerLayout drawer = findViewById(R.id.drawer_layout);
+      drawer.closeDrawer(GravityCompat.START);
+    }
     return true;
   }
 

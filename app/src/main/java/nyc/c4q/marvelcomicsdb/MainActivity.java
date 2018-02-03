@@ -1,5 +1,7 @@
 package nyc.c4q.marvelcomicsdb;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,7 +19,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import io.realm.Realm;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,144 +41,147 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-  private static final NewsDBService marvelNewsCallback = NewsDatabaseServiceGenerator
-      .createService();
+    private static final NewsDBService marvelNewsCallback = NewsDatabaseServiceGenerator
+            .createService();
 
-  private RecyclerView newsRecyclerView;
-  private List<Articles> articlesList = new ArrayList<>();
+    private RecyclerView newsRecyclerView;
+    private List<Articles> articlesList = new ArrayList<>();
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-    Realm.init(getBaseContext());
-    RealmServiceManager.initializeRealmConfiguration();
+        Realm.init(getBaseContext());
+        RealmServiceManager.initializeRealmConfiguration();
 
-    newsRecyclerView = findViewById(R.id.news_rv);
-    NewsAdapter newsAdapter = new NewsAdapter(articlesList);
-    LinearLayoutManager newsLayoutManager = new LinearLayoutManager(getApplicationContext(),
-        LinearLayoutManager.VERTICAL, false);
-    newsRecyclerView.setAdapter(newsAdapter);
-    newsRecyclerView.setLayoutManager(newsLayoutManager);
+        newsRecyclerView = findViewById(R.id.news_rv);
+        NewsAdapter newsAdapter = new NewsAdapter(articlesList);
+        LinearLayoutManager newsLayoutManager = new LinearLayoutManager(getApplicationContext(),
+                LinearLayoutManager.VERTICAL, false);
+        newsRecyclerView.setAdapter(newsAdapter);
+        newsRecyclerView.setLayoutManager(newsLayoutManager);
 
-    Toolbar toolbar = findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-    FloatingActionButton fab = findViewById(R.id.fab);
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show();
-      }
-    });
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", "support@fakemarvel.com", null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Write Subject");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "What's going on?");
+                startActivity(Intent.createChooser(emailIntent, "Send email..."));
+            }
+        });
 
-    DrawerLayout drawer = findViewById(R.id.drawer_layout);
-    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-    drawer.addDrawerListener(toggle);
-    toggle.syncState();
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
-    NavigationView navigationView = findViewById(R.id.nav_view);
-    navigationView.setNavigationItemSelectedListener(this);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
-    getMarvelNewsData();
-  }
-
-  @Override
-  public void onBackPressed() {
-    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-    if (drawer.isDrawerOpen(GravityCompat.START)) {
-      drawer.closeDrawer(GravityCompat.START);
-    } else {
-      super.onBackPressed();
-    }
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.main, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    // Handle action bar item clicks here. The action bar will
-    // automatically handle clicks on the Home/Up button, so long
-    // as you specify a parent activity in AndroidManifest.xml.
-    int id = item.getItemId();
-
-    //noinspection SimplifiableIfStatement
-    if (id == R.id.action_settings) {
-      return true;
+        getMarvelNewsData();
     }
 
-    return super.onOptionsItemSelected(item);
-  }
-
-  @Override
-  public boolean onNavigationItemSelected(MenuItem item) {
-    // Handle navigation view item clicks here.
-    Fragment fragment = null;
-    Class fragmentClass;
-
-    switch (item.getItemId()) {
-      case R.id.nav_characters:
-        fragmentClass = CharactersFragment.class;
-        break;
-      case R.id.nav_comic_books:
-        fragmentClass = ComicFragment.class;
-        break;
-      case R.id.nav_creators:
-        fragmentClass = CreatorFragment.class;
-        break;
-      case R.id.nav_favorites:
-        fragmentClass = FavoritesFragment.class;
-        break;
-      default:
-        fragmentClass = null;
-        break;
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
-    try {
-      fragment = (Fragment) fragmentClass.newInstance();
-    } catch (InstantiationException e) {
-      e.printStackTrace();
-    } catch (IllegalAccessException e) {
-      e.printStackTrace();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 
-    if (fragment != null) {
-      FragmentManager fragmentManager = getSupportFragmentManager();
-      fragmentManager.beginTransaction().replace(R.id.main_frame, fragment).addToBackStack(null)
-          .commit();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-      DrawerLayout drawer = findViewById(R.id.drawer_layout);
-      drawer.closeDrawer(GravityCompat.START);
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
-    return true;
-  }
 
-  public void getMarvelNewsData() {
-    Call<NewsDataWrapper> call = marvelNewsCallback
-        .getNewsDiscover(PrivateAPI.getNewsApiKey());
-    call.enqueue(new Callback<NewsDataWrapper>() {
-      @Override
-      public void onResponse(Call<NewsDataWrapper> call, Response<NewsDataWrapper> response) {
-        List<Articles> responseList = response.body().getArticles();
-        newsRecyclerView.setAdapter(new NewsAdapter(responseList));
-        Log.d("News Callback", "onSuccess: " + response.isSuccessful());
-      }
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        Fragment fragment = null;
+        Class fragmentClass;
 
-      @Override
-      public void onFailure(Call<NewsDataWrapper> call, Throwable t) {
-        Log.d("News Callback", "onFailure: ", t.fillInStackTrace());
-      }
-    });
-  }
+        switch (item.getItemId()) {
+            case R.id.nav_characters:
+                fragmentClass = CharactersFragment.class;
+                break;
+            case R.id.nav_comic_books:
+                fragmentClass = ComicFragment.class;
+                break;
+            case R.id.nav_creators:
+                fragmentClass = CreatorFragment.class;
+                break;
+            case R.id.nav_favorites:
+                fragmentClass = FavoritesFragment.class;
+                break;
+            default:
+                fragmentClass = null;
+                break;
+        }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.main_frame, fragment).addToBackStack(null)
+                    .commit();
+
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        return true;
+    }
+
+    public void getMarvelNewsData() {
+        Call<NewsDataWrapper> call = marvelNewsCallback
+                .getNewsDiscover(PrivateAPI.getNewsApiKey());
+        call.enqueue(new Callback<NewsDataWrapper>() {
+            @Override
+            public void onResponse(Call<NewsDataWrapper> call, Response<NewsDataWrapper> response) {
+                List<Articles> responseList = response.body().getArticles();
+                newsRecyclerView.setAdapter(new NewsAdapter(responseList));
+                Log.d("News Callback", "onSuccess: " + response.isSuccessful());
+            }
+
+            @Override
+            public void onFailure(Call<NewsDataWrapper> call, Throwable t) {
+                Log.d("News Callback", "onFailure: ", t.fillInStackTrace());
+            }
+        });
+    }
 
 }

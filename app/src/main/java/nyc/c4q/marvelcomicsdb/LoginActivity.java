@@ -41,7 +41,14 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         background = findViewById(R.id.login_bgd);
-        int imagesToShow[] = {R.drawable.bgd_storm, R.drawable.bgd_thor, R.drawable.bgd_captian_america, R.drawable.bgd_dare_devil, R.drawable.bgd_hulk, R.drawable.bgd_iron_man, R.drawable.bgd_spiderman};
+        int imagesToShow[] = {
+                R.drawable.bgd_storm,
+                R.drawable.bgd_thor,
+                R.drawable.bgd_captian_america,
+                R.drawable.bgd_dare_devil,
+                R.drawable.bgd_hulk,
+                R.drawable.bgd_iron_man,
+                R.drawable.bgd_spiderman};
 
         checkBox = findViewById(R.id.checkbox_remember_me);
 
@@ -62,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences.Editor editor = login.edit();
                 if (checkBox.isChecked()) {
-                    editor.putString("username", email.getText().toString());
+                    editor.putString("email", email.getText().toString());
                     editor.putString("password", password.getText().toString());
                     editor.putBoolean("isChecked", checkBox.isChecked());
                     editor.commit();
@@ -70,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putBoolean("isChecked", checkBox.isChecked());
                     editor.commit();
                 }
+
                 verifyUser();
             }
         });
@@ -84,6 +92,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         animate(background, imagesToShow, 0, true);
+
+
     }
 
     private void animate(final ImageView imageView, final int images[], final int imageIndex, final boolean forever) {
@@ -147,22 +157,10 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
 
-//                sharedPrefs();
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
     }
 
-    public void sharedPrefs() {
-        String checkUser = "user" + email.getText().toString();
-        String checkPassword = "password" + email.getText().toString();
-
-        if (email.getText().toString().equalsIgnoreCase(login.getString(checkUser, null))
-                && password.getText().toString().equals(login.getString(checkPassword, null))) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.putExtra("currentUser", email.getText().toString());
-            startActivity(intent);
-        }
-    }
 }

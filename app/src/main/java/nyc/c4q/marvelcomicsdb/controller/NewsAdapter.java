@@ -2,10 +2,16 @@ package nyc.c4q.marvelcomicsdb.controller;
 
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +20,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import nyc.c4q.marvelcomicsdb.MainActivity;
 import nyc.c4q.marvelcomicsdb.R;
+import nyc.c4q.marvelcomicsdb.fragments.WebFragment;
 import nyc.c4q.marvelcomicsdb.model.News.Articles;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
@@ -33,7 +41,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     }
 
     @Override
-    public void onBindViewHolder(NewsViewHolder holder, int position) {
+    public void onBindViewHolder(NewsViewHolder holder, final int position) {
         Picasso.with(context).load(articlesList.get(position).getUrlToImage())
                 .into(holder.articleImage);
 
@@ -45,6 +53,24 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
         String description = articlesList.get(position).getDescription();
         holder.articleDescription.setText(description);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle articleUrl = new Bundle();
+                articleUrl.putString("webpage", articlesList.get(position).getUrl());
+
+                WebFragment webFragment = new WebFragment();
+                webFragment.setArguments(articleUrl);
+                FragmentManager fragmentManager =((MainActivity) context).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragmentTransaction.replace(R.id.drawer_layout, webFragment).addToBackStack("webstack");
+                fragmentTransaction.commit();
+
+                Log.d("Get Article",articlesList.get(position).getUrl());
+            }
+        });
     }
 
     @Override
@@ -55,6 +81,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     public static class NewsViewHolder extends RecyclerView.ViewHolder {
         ImageView articleImage;
         TextView articleTitle, articleAuthor, articleDescription;
+        WebView browser;
 
         public NewsViewHolder(View itemView) {
             super(itemView);
@@ -62,6 +89,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             articleAuthor = itemView.findViewById(R.id.article_author);
             articleDescription = itemView.findViewById(R.id.article_description);
             articleImage = itemView.findViewById(R.id.article_image);
+
         }
     }
 }

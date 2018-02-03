@@ -7,8 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface NewsDBService {
-
-    @GET("v2/everything?language=en&q=marvel&sources=fortune")
+    @GET("v2/everything?language=en&sources=buzzfeed&sortby=relevancy&q=marvel")
     Call<NewsDataWrapper> getNewsDiscover(
             @Query("apiKey") String apiKey
     );
